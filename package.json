@@ -2,6 +2,13 @@
   "name": "thingyota-app-react",
   "version": "0.1.0",
   "private": true,
+  "contributors": [
+    {
+      "name": "Victor Fernandes Raton",
+      "email": "vfraton@gmail.com",
+      "url": "https://github.com/victorfernandesraton"
+    }
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
