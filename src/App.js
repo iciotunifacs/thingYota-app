@@ -1,10 +1,10 @@
 import React from 'react';
 
+import AppRoute from "./layout/AppRoute"
+
 function App() {
   return (
-    <div>
-      Simple React app
-    </div>
+    <AppRoute/>
   );
 }
 
