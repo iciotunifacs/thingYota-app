@@ -13,7 +13,7 @@ const AppRoute = (props) => {
     <AuthContext.Provider value={false}>
       <Router>
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/home" component={Home}/>
+          <PrivateRoute exact path="/" component={Home}/>
       </Router>
     </AuthContext.Provider>
   );
