@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
+import useLocalStorage from '../../hooks/useLocalStorage';
+
 
 const SinginView = (props) => {
   const [username, setUsername] = useState("");
   const [passworld, setPasworld] = useState("");
+  const [user, setUser] = useLocalStorage('user');
+  const handleSubmit = () => {
+
+  }
   return (
     <div>
       <h1>Login</h1>
