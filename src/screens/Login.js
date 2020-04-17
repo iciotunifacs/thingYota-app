@@ -1,8 +1,8 @@
 import React from 'react'
 import SinginView from "../components/auth/SinginView-container"
-const Login = () => {
+const Login = (props) => {
   return (
-    <SinginView />
+    <SinginView {...props}/>
   )
 }
 

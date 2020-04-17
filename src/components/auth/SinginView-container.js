@@ -1,18 +1,26 @@
 import React, { useState } from 'react'
 import useLocalStorage from '../../hooks/useLocalStorage';
+import {useAuth} from './Auth-context'
 
-
+import {singin} from './Auth-action'
 const SinginView = (props) => {
   const [username, setUsername] = useState("");
-  const [passworld, setPasworld] = useState("");
+  const [password, setPasword] = useState("");
   const [user, setUser] = useLocalStorage('user');
-  const handleSubmit = () => {
-
+  const [state, dispatch] = useAuth()
+  console.log(process.env.API_REST_URL)
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    singin(dispatch, {
+      username,
+      password,
+      setUser
+    })
   }
   return (
     <div>
       <h1>Login</h1>
-      <form>
+      {/* <form> */}
         <label defaultValue="Login" />
         <input
           type="text"
@@ -21,15 +29,16 @@ const SinginView = (props) => {
         />
         <label defaultValue="Senha" />
         <input
-          type="passworld"
-          value={passworld}
-          onChange={data => setPasworld(data.target.value)}
+          type="password"
+          value={password}
+          onChange={data => setPasword(data.target.value)}
         />
         <input
-          type="submit"
+          type="button"
           value="Singin"
-          disabled={(username !== "" && passworld !== "")} />
-      </form>
+          onClick={handleSubmit}
+          disabled={(username === "" && password === "")} />
+      {/* </form> */}
     </div>
   )
 }
