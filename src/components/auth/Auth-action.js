@@ -11,11 +11,11 @@ export const singin = async (dispatch, filter) => {
       username: filter.username,
       password: filter.password
     })
-
-    filter.setUser(request.data)
+    // store user in localstorage
+    filter.setUser({...request.data.data.user, token: request.data.data.token})
     dispatch({
       type: AuthConstant.LOGIN_SUCCESS,
-      data: request.data
+      data: {...request.data.data.user, token: request.data.data.token}
     })
 
   } catch(error) {
@@ -25,3 +25,21 @@ export const singin = async (dispatch, filter) => {
     alert(error.message)
   }
 }
+
+export const checkAuth = ({ setUser, user, dispatch, history, redirectTo = null, from = '/' }) => {
+  try {
+    if (user) {
+      dispatch({
+        type: AuthConstant.LOGIN_SUCCESS,
+        data: {...user}
+      })
+      setUser(user)
+      history.push(redirectTo && redirectTo !== '/signin' ? redirectTo : from);
+    }
+  } catch (error) {
+    console.error({ error });
+    dispatch({
+      type: AuthConstant.LOGIN_FAILURE
+    })
+  }
+};

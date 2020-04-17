@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
-import useLocalStorage from '../../hooks/useLocalStorage';
-import {useAuth} from './Auth-context'
+import React, { useState, useEffect } from 'react'
 
-import {singin} from './Auth-action'
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { useHistory, useLocation } from '../../utils/routing';
+import {useAuth} from './Auth-context';
+
+import {singin, checkAuth} from './Auth-action';
+
 const SinginView = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPasword] = useState("");
+
   const [user, setUser] = useLocalStorage('user');
   const [state, dispatch] = useAuth()
-  console.log(process.env.API_REST_URL)
-  const handleSubmit = (event) => {
+  const history = useHistory();
+  const location = useLocation();
+  function handleSubmit(event) {
     event.preventDefault()
     singin(dispatch, {
       username,
@@ -17,6 +22,19 @@ const SinginView = (props) => {
       setUser
     })
   }
+  useEffect(() => {
+    if (user) {
+      checkAuth({
+        dispatch,
+        user,
+        setUser,
+        redirectTo: "/home",
+        from: window.location.pathname,
+        history,
+        location
+      })
+    }
+  }, [user])
   return (
     <div>
       <h1>Login</h1>
