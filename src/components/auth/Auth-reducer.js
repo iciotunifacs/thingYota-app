@@ -13,13 +13,13 @@ export const authReducer = (state, action) => {
     case AuthConstant.REGISTER_REQUEST:
       return { ...state, loading: true };
     case AuthConstant.REGISTER_SUCCESS:
-      return { ...state, loading: false, loggedIn: true, user: action.user };
+      return { ...state, loading: false, loggedIn: true, user: action.user , error: null};
     case AuthConstant.REGISTER_FAILURE:
-      return { ...state, loading: false, loggedIn: false };
+      return { ...state, loading: false, loggedIn: false, error: action.error };
     case AuthConstant.LOGIN_REQUEST:
       return { ...state, loading: true };
     case AuthConstant.LOGIN_SUCCESS:
-      return { ...state, loading: false, loggedIn: true, user: {...action.data}};
+      return { ...state, loading: false, loggedIn: true, user: {...action.data}, error: null};
     case AuthConstant.LOGIN_FAILURE:
       return { ...state, loading: false, loggedIn: false, error: action.error };
     case AuthConstant.LOGOUT:

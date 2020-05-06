@@ -4,7 +4,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import { useHistory, useLocation } from '../../utils/routing';
 import {useAuth} from './Auth-context';
 
-import {singin, checkAuth} from './Auth-action';
+import {singup, checkAuth} from './Auth-action';
 
 import {
   Form,
@@ -12,7 +12,8 @@ import {
   Button,
   Layout,
   Row,
-  Col
+  Col,
+  Alert
 } from 'antd';
 
 const {
@@ -32,6 +33,9 @@ const SinginView = (props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPasword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
 
   const [user, setUser] = useLocalStorage('user');
   const [state, dispatch] = useAuth();
@@ -39,12 +43,16 @@ const SinginView = (props) => {
   const location = useLocation();
   function handleSubmit(event) {
     event.preventDefault()
-    singin(dispatch, {
+    singup(dispatch, {
       username,
       password,
+      firstname,
+      lastname,
+      email,
       setUser
     })
   }
+
   useEffect(() => {
     if (user) {
       checkAuth({
@@ -58,6 +66,7 @@ const SinginView = (props) => {
       })
     }
   }, [user])
+
   return (
     <div>
       <Layout>
@@ -74,6 +83,27 @@ const SinginView = (props) => {
                   rules={[{ required: true, message: 'Please input your username!' }]}
                 >
                   <Input  value={username} onChange={data => setUsername(data.target.value)}/>
+                </Form.Item>
+                <Form.Item
+                  label="First name"
+                  name="firstname"
+                  rules={[{ required: true, message: 'Please input your first name!' }]}
+                >
+                  <Input  value={firstname} onChange={data => setFirstname(data.target.value)}/>
+                </Form.Item>
+                <Form.Item
+                  label="Last name"
+                  name="lastname"
+                  rules={[{ required: true, message: 'Please input your Last name!' }]}
+                >
+                  <Input  value={lastname} onChange={data => setLastname(data.target.value)}/>
+                </Form.Item>
+                <Form.Item
+                  label="E-mail"
+                  name="email"
+                  rules={[{ required: true, message: 'Please input your e-mail!' }]}
+                >
+                  <Input  value={email} onChange={data => setEmail(data.target.value)}/>
                 </Form.Item>
 
                 <Form.Item
@@ -96,6 +126,9 @@ const SinginView = (props) => {
           Footer
         </Footer>
       </Layout>
+      {state.error && (
+        <p>{state.error.response.data.message}</p>
+      )}
     </div>
   );
 }
