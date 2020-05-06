@@ -1,9 +1,25 @@
-import { createContext, useContext } from 'react';
+import React, { useContext, createContext, useReducer } from 'react';
 
-export const AuthContext = createContext({
-  isAuth: false
-});
+import { authReducer, initialAuthState } from './Auth-reducer';
 
-export function useAuth() {
-  return useContext(AuthContext);
+const authContext = createContext();
+
+const AuthProvider = ({ children }) => {
+  const auth = useReducer(authReducer, initialAuthState);
+
+  return (
+    <authContext.Provider value={auth}>
+      {children}
+    </authContext.Provider>
+  );
 }
+
+// Retorna state e dispatch
+const useAuth = () => (
+  useContext(authContext)
+);
+
+export {
+  AuthProvider as default,
+  useAuth
+};
