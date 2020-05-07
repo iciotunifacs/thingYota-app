@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { useHistory, useLocation } from '../../utils/routing';
-import {useAuth} from './Auth-context';
-
-import {singup, checkAuth} from './Auth-action';
-
 import {
   Form,
   Input,
@@ -13,13 +7,25 @@ import {
   Layout,
   Row,
   Col,
-  Alert
+  Typography,
+  Tooltip
 } from 'antd';
 
+import {Link} from "react-router-dom"
+
+import useLocalStorage from '../../hooks/useLocalStorage';
+
+import { useHistory, useLocation } from '../../utils/routing';
+import { useAuth } from './Auth-context';
+
+import { singup, checkAuth } from './Auth-action';
+
 const {
-  Header,
-  Content,
-  Footer,
+  Text
+} = Typography
+
+const {
+  Content
 } = Layout;
 
 const SinginView = (props) => {
@@ -41,17 +47,6 @@ const SinginView = (props) => {
   const [state, dispatch] = useAuth();
   const history = useHistory();
   const location = useLocation();
-  function handleSubmit(event) {
-    event.preventDefault()
-    singup(dispatch, {
-      username,
-      password,
-      firstname,
-      lastname,
-      email,
-      setUser
-    })
-  }
 
   useEffect(() => {
     if (user) {
@@ -67,69 +62,81 @@ const SinginView = (props) => {
     }
   }, [user])
 
-  return (
-    <div>
-      <Layout>
-        <Header>
-          Wather control
-        </Header>
-        <Content>
-          <Row>
-            <Col span={6} offset={8}>
-              <Form {...layout} name="basic" initialValues={{ remember: true }}>
-                <Form.Item
-                  label="Username"
-                  name="username"
-                  rules={[{ required: true, message: 'Please input your username!' }]}
-                >
-                  <Input  value={username} onChange={data => setUsername(data.target.value)}/>
-                </Form.Item>
-                <Form.Item
-                  label="First name"
-                  name="firstname"
-                  rules={[{ required: true, message: 'Please input your first name!' }]}
-                >
-                  <Input  value={firstname} onChange={data => setFirstname(data.target.value)}/>
-                </Form.Item>
-                <Form.Item
-                  label="Last name"
-                  name="lastname"
-                  rules={[{ required: true, message: 'Please input your Last name!' }]}
-                >
-                  <Input  value={lastname} onChange={data => setLastname(data.target.value)}/>
-                </Form.Item>
-                <Form.Item
-                  label="E-mail"
-                  name="email"
-                  rules={[{ required: true, message: 'Please input your e-mail!' }]}
-                >
-                  <Input  value={email} onChange={data => setEmail(data.target.value)}/>
-                </Form.Item>
+  function handleSubmit(event) {
+    event.preventDefault()
+    singup(dispatch, {
+      username,
+      password,
+      firstname,
+      lastname,
+      email,
+      setUser
+    })
+  }
 
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                  <Input.Password value={password} onChange={data => setPasword(data.target.value)}/>
-                </Form.Item>
+  return (
+    <Layout style={{ backgroundColor: "#FAFAFA" }}>
+      <Content>
+        <Row>
+          <Col span={6} offset={8}>
+            <Form {...layout} name="basic" initialValues={{ remember: true }}>
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
+                <Input value={username} onChange={data => setUsername(data.target.value)} />
+              </Form.Item>
+              <Form.Item
+                label="First name"
+                name="firstname"
+                rules={[{ required: true, message: 'Please input your first name!' }]}
+              >
+                <Input value={firstname} onChange={data => setFirstname(data.target.value)} />
+              </Form.Item>
+              <Form.Item
+                label="Last name"
+                name="lastname"
+                rules={[{ required: true, message: 'Please input your Last name!' }]}
+              >
+                <Input value={lastname} onChange={data => setLastname(data.target.value)} />
+              </Form.Item>
+              <Form.Item
+                label="E-mail"
+                name="email"
+                rules={[{ required: true, message: 'Please input your e-mail!' }]}
+              >
+                <Input value={email} onChange={data => setEmail(data.target.value)} />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+              >
+                <Input.Password value={password} onChange={data => setPasword(data.target.value)} />
+              </Form.Item>
+              <Form.Item {...tailLayout}>
+                <Tooltip title="Useful information">
+                  <Link to="/login">
+                    <a >Have account? Sing in</a>
+                  </Link>
+                </Tooltip>
+              </Form.Item>
+
+              {state.error && (
                 <Form.Item {...tailLayout}>
-                  <Button type="primary" htmlType="submit" onClick={handleSubmit}>
-                    Submit
-                  </Button>
+                  <Text type="danger"> {state.error.response.data.message}</Text>
                 </Form.Item>
-              </Form>
-            </Col>
-          </Row>
-        </Content>
-        <Footer>
-          Footer
-        </Footer>
-      </Layout>
-      {state.error && (
-        <p>{state.error.response.data.message}</p>
-      )}
-    </div>
+              )}
+              <Form.Item {...tailLayout}>
+                <Button type="primary" htmlType="submit" onClick={handleSubmit}>Submit</Button>
+              </Form.Item>
+            </Form>
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   );
 }
 

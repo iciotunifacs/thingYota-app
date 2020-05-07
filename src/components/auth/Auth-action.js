@@ -23,9 +23,9 @@ export const singin = async (dispatch, filter) => {
 
   } catch(error) {
     dispatch({
-      type: AuthConstant.LOGIN_FAILURE
+      type: AuthConstant.LOGIN_FAILURE,
+      error: error
     })
-    alert(error.message)
   }
 }
 
