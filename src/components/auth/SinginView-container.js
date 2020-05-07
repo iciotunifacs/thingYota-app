@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react'
 
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { useHistory, useLocation } from '../../utils/routing';
-import {useAuth} from './Auth-context';
-
-import {singin, checkAuth} from './Auth-action';
-
 import {
   Form,
   Input,
   Button,
   Layout,
   Row,
-  Col
+  Col,
+  Typography,
+  Tooltip
 } from 'antd';
 
+import { Link } from "react-router-dom"
+
+import useLocalStorage from '../../hooks/useLocalStorage';
+
+import { useHistory, useLocation } from '../../utils/routing';
+
+import { useAuth } from './Auth-context';
+import { singin, checkAuth } from './Auth-action';
+
 const {
-  Header,
+  Text
+} = Typography;
+
+const {
   Content,
-  Footer,
 } = Layout;
 
 const SinginView = (props) => {
@@ -37,14 +44,7 @@ const SinginView = (props) => {
   const [state, dispatch] = useAuth();
   const history = useHistory();
   const location = useLocation();
-  function handleSubmit(event) {
-    event.preventDefault()
-    singin(dispatch, {
-      username,
-      password,
-      setUser
-    })
-  }
+
   useEffect(() => {
     if (user) {
       checkAuth({
@@ -58,45 +58,60 @@ const SinginView = (props) => {
       })
     }
   }, [user])
-  return (
-    <div>
-      <Layout>
-        <Header>
-          Wather control
-        </Header>
-        <Content>
-          <Row>
-            <Col span={6} offset={8}>
-              <Form {...layout} name="basic" initialValues={{ remember: true }}>
-                <Form.Item
-                  label="Username"
-                  name="username"
-                  rules={[{ required: true, message: 'Please input your username!' }]}
-                >
-                  <Input  value={username} onChange={data => setUsername(data.target.value)}/>
-                </Form.Item>
 
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                  <Input.Password value={password} onChange={data => setPasword(data.target.value)}/>
-                </Form.Item>
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    singin(dispatch, {
+      username,
+      password,
+      setUser
+    })
+  }
+
+  return (
+    <Layout style={{ background: "#FAFAFA" }}>
+      <Content>
+        <Row>
+          <Col span={6} offset={8}>
+            <Form {...layout} name="basic" initialValues={{ remember: true }}>
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
+                <Input value={username} onChange={data => setUsername(data.target.value)} />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+              >
+                <Input.Password value={password} onChange={data => setPasword(data.target.value)} />
+              </Form.Item>
+              {state.error && (
                 <Form.Item {...tailLayout}>
+                  <Text type="danger"> {state.error.response.data.message}</Text>
+                </Form.Item>
+              )}
+              <Form.Item {...tailLayout}>
+                <Tooltip title="Useful information">
+                  <Link to="/singup">
+                    <a>Not have account? Sing up</a>
+                  </Link>
+                </Tooltip>
+              </Form.Item>
+              <Form.Item {...tailLayout}>
                   <Button type="primary" htmlType="submit" onClick={handleSubmit}>
                     Submit
                   </Button>
                 </Form.Item>
-              </Form>
-            </Col>
-          </Row>
-        </Content>
-        <Footer>
-          Footer
-        </Footer>
-      </Layout>
-    </div>
+            </Form>
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   );
 }
 

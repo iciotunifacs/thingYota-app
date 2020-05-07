@@ -16,13 +16,9 @@ const { SubMenu } = Menu;
 const NavbarView = (props) => {
 
   return (
-    <div style={{ width: 256 }}>
+    <div style={{ height: "100vh" }}>
       {/* <NavUserView/> */}
-      <Menu
-        defaultSelectedKeys={['4']}
-        mode="inline"
-        theme="dark"
-      >
+      <Menu defaultSelectedKeys={['4']} mode="inline" theme="dark">
         <Menu.Item key="1">
           <PieChartOutlined />
           <span>Option 1</span>

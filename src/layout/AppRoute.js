@@ -7,7 +7,7 @@ import AuthProvider from "../components/auth/Auth-context";
 
 import Login from "../screens/Login";
 import Singup from "../screens/Singup";
-import Home from "../screens/Home"
+import Main from "../screens/Main"
 
 const AppRoute = (props) => {
   return (
@@ -15,7 +15,7 @@ const AppRoute = (props) => {
       <Router>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/singup" component={Singup}/>
-          <PrivateRoute exact path="/" component={Home}/>
+          <PrivateRoute exact path="/" component={Main}/>
       </Router>
     </AuthProvider>
   );
