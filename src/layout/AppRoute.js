@@ -15,6 +15,7 @@ const AppRoute = (props) => {
       <Router>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/singup" component={Singup}/>
+          <Route exact path="/datasheet" component={Main}/>
           <PrivateRoute exact path="/" component={Main}/>
       </Router>
     </AuthProvider>
