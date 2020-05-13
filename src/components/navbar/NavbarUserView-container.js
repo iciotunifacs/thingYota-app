@@ -1,21 +1,22 @@
 import React from 'react'
 
 import {
-  Skeleton,
-  Switch,
-  Card,
-  Avatar
+  Avatar,
+  Typography
 } from 'antd';
 
 import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined
-} from '@ant-design/icons';
+  StyledUserCardMenu,
+  UserTextName
+} from './Navbar-style'
 
-import { useAuth } from "../auth/Auth-context";
+import {
+  useAuth
+} from "../auth/Auth-context";
 
-const { Meta } = Card;
+import {
+  toCaptalize
+} from '../../utils/string'
 
 const NavbarUserView = (props) => {
 
@@ -24,27 +25,12 @@ const NavbarUserView = (props) => {
   if (!loggedIn) return (<></>)
 
   return (
-    <div>
-      <Switch checked={loggedIn} />
-      <Card
-        style={{ width: 300, marginTop: 16 }}
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
-        ]}
-        >
-        <Skeleton loading={!loggedIn} avatar active>
-          <Meta
-            avatar={
-              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-            }
-            title={`${user.first_name} ${user.last_name}`}
-            description="This is the description"
-          />
-        </Skeleton>
-      </Card>
-    </div>
+    <StyledUserCardMenu>
+      {/* <Switch checked={loggedIn} /> */}
+        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        <UserTextName>{`${toCaptalize(user.first_name)} ${toCaptalize(user.last_name)}`}</UserTextName>
+        <a>Editar perfil</a>
+    </StyledUserCardMenu>
   );
 }
 

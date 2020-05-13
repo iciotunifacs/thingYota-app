@@ -17,6 +17,7 @@ const AppRoute = (props) => {
           <Route exact path="/singup" component={Singup}/>
           <Route exact path="/datasheet" component={Main}/>
           <PrivateRoute exact path="/" component={Main}/>
+          {/* <Route component={Exceptions({type: 404})}/> */}
       </Router>
     </AuthProvider>
   );
