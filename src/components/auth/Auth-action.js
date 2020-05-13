@@ -81,3 +81,11 @@ export const singup = async (dispatch, parans) => {
       })
   }
 }
+
+export const singout = (dispatch, {setUser, history}) => {
+  dispatch({
+    type: AuthConstant.LOGOUT
+  })
+  setUser(null);
+  history.push('/login');
+}
