@@ -1,23 +1,38 @@
-import React from "react";
+import React, {useState, useCallback} from "react";
 import { Layout } from 'antd';
 
-import Home from "../components/home/HomeView-container"
-import Navbar from "../components/navbar/Navbarview-container"
 import './Main-style.css';
+
+import Navbar from "../components/navbar/Navbarview-container"
+
+import Home from "../components/home/HomeView-container"
+import Statistic from '../components/statistic/StatisticView-container';
+
 const { Sider, Content } = Layout;
 
 
 const MainScreen = (props) => {
+
+  const [render, setRender] = useState(1);
+
+  const components = {
+    1: Home,
+    2: Statistic,
+    3: (props) => <div>Alone</div>
+  }
+
+  const updateRender = useCallback(item => setRender(item.key),[render]);
+
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
         <div className="logo" />
-        <Navbar/>
+        <Navbar updateRender={updateRender}/>
       </Sider>
       <Layout>
         {/* <Header className="site-layout-sub-header-background" style={{ padding: 0 }} /> */}
         <Content style={{ margin: '24px 16px 0' }}>
-          <Home />
+          {components[render](props)}
         </Content>
       </Layout>
     </Layout>
