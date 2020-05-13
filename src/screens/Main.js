@@ -18,7 +18,8 @@ const MainScreen = (props) => {
   const components = {
     1: Home,
     2: Statistic,
-    3: (props) => <div>Alone</div>
+    3: (props) => <div>Alone</div>,
+    4: (props) => <div>Historico</div>
   }
 
   const updateRender = useCallback(item => setRender(item.key),[render]);
