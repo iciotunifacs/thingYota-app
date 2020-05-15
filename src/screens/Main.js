@@ -7,6 +7,7 @@ import Navbar from "../components/navbar/Navbarview-container"
 
 import Home from "../components/home/HomeView-container"
 import Statistic from '../components/statistic/StatisticView-container';
+import BucketView from '../components/buckets/BucketView-container'
 
 const { Sider, Content } = Layout;
 
@@ -17,7 +18,7 @@ const MainScreen = (props) => {
 
   const components = {
     1: Home,
-    2: Statistic,
+    2: BucketView,
     3: (props) => <div>Alone</div>,
     4: (props) => <div>Historico</div>
   }
