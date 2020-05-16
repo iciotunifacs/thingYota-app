@@ -13,6 +13,8 @@ import {
   reducer as bucketReducer
 } from './Buckets-reducer'
 
+import SensorList from '../senseors/SensorList'
+
 const {
   Item
 } = Descriptions;
@@ -28,8 +30,6 @@ function SingleBucketView({bucketId}) {
   useEffect(() => {
     getBucket(bucketDispatch, {
       bucketId,
-      limit : 10,
-      page: 0
     })
   }, [bucketId])
 
@@ -52,6 +52,10 @@ function SingleBucketView({bucketId}) {
         <Item label='ID'>{data._id}</Item>
         <Item label='Data de criação'>{data.create_at}</Item>
       </Descriptions>
+      <div>
+        Sensores
+        <SensorList sensors={data.Sensors}/>
+      </div>
     </div>
   );
 }
