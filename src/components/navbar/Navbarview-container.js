@@ -29,22 +29,23 @@ const NavbarView = (props) => {
   const history = useHistory();
   const [state, dispatch] = useAuth();
 
-  const {updateRender} = props
-
   return (
     <div style={{ height: "100vh" }}>
       <NavUserView/>
-      <Menu defaultSelectedKeys={['4']} mode="inline" theme="dark">
-          <Menu.Item key="1" onClick={updateRender}>
+      <Menu mode="inline" theme="dark">
+          <Menu.Item key="1">
+            <Link to='/statistics'/>
             <PieChartOutlined />
             <span>Estatísticas</span>
           </Menu.Item>
         {/* </Link> */}
-        <Menu.Item key="2" onClick={updateRender}>
+        <Menu.Item key="2" >
+          <Link to='/buckets'/>
           <ExperimentFilled />
           <span>Reservatórios</span>
         </Menu.Item>
-        <Menu.Item key="3" onClick={updateRender}>
+        <Menu.Item key="3" >
+          <Link to='/report'/>
           <MailOutlined />
           <span>Reportar erro</span>
         </Menu.Item>

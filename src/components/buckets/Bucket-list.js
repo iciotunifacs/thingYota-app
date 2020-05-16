@@ -1,5 +1,7 @@
 import React, {useReducer, useEffect} from 'react';
 
+import {Link} from 'react-router-dom'
+
 import {
   getBucket
 } from './Bucket-action'
@@ -23,7 +25,7 @@ function BucketList(props) {
   }
 
   if(bucketState.data && bucketState.data.length == 0) {
-    return <div>Lista vazia</div>
+    return <div>Lista vaAzia</div>
   }
 
   return (
@@ -33,6 +35,7 @@ function BucketList(props) {
         <thead>
           <th>Nome</th>
           <th>Tipo</th>
+          <th>Dados</th>
         </thead>
         <tbody>
           {bucketState.data.map(bucket => {
@@ -40,6 +43,9 @@ function BucketList(props) {
               <tr>
                 <td>{bucket.name}</td>
                 <td>{bucket.type}</td>
+                <Link to={`/bucket/${bucket._id}`}>
+                  <td>Dados</td>
+                </Link>
               </tr>
             )
           })}

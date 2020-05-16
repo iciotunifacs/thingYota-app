@@ -1,6 +1,6 @@
 import {apiRest} from '../../utils/request'
 
-export const getBucket = (dispatch,{limit, page}) => {
+export const getBucket = (dispatch,{limit, page, bucketId}) => {
 
   dispatch({
     type: "FETCHING"
@@ -8,6 +8,9 @@ export const getBucket = (dispatch,{limit, page}) => {
 
   let url = '/bucket';
 
+  if (bucketId) {
+    url = `/bucket/${bucketId}`
+  }
 
   apiRest.get(url, {
     params: {

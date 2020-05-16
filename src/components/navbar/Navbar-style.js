@@ -5,7 +5,7 @@ export const StyledUserCardMenu = styled.div`
   height: 31px;
   margin: 16px 28px 16px 0;
   float: left;
-  display: 'flex',
+  display: 'flex'
 `;
 
 export const UserTextName = styled.span`

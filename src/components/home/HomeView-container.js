@@ -1,11 +1,15 @@
 import React from 'react'
 
+import {
+  homeDiv
+} from './Home-style'
+
 const HomeView = (props) => {
   return (
-    <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-      Home view
+    <homeDiv>
       <h1>Teste</h1>
-    </div>
+      Home view
+    </homeDiv>
   )
 }
 

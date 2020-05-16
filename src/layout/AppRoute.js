@@ -1,25 +1,26 @@
 import React from "react";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import PrivateRoute from './PrivateRoute';
-import AuthProvider from "../components/auth/Auth-context";
 
 import Login from "../screens/Login";
 import Singup from "../screens/Singup";
-import Main from "../screens/Main"
+import Home from '../screens/Home'
+import Buckets from '../screens/Buckets'
+import SingleBucket from '../screens/SingleBucket'
 
 const AppRoute = (props) => {
   return (
-    <AuthProvider>
-      <Router>
+      <Switch>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/singup" component={Singup}/>
-          <Route exact path="/datasheet" component={Main}/>
-          <PrivateRoute exact path="/" component={Main}/>
+          <Route exact path="/datasheet" component={Home}/>
+          <PrivateRoute exact path="/" component={Home}/>
+          <PrivateRoute exact path="/buckets" component={Buckets}/>
+          <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
           {/* <Route component={Exceptions({type: 404})}/> */}
-      </Router>
-    </AuthProvider>
+      </Switch>
   );
 }
 
