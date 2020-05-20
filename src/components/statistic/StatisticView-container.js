@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
+import WaterBox from '../boxes/WaterBox';
 
-const HomeView = (props) => {
+export default function HomeView(props) {
   return (
     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
       Statistica
-      <h1>Teste</h1>
+      <WaterBox name="ABC" />
     </div>
   )
 }
 
-export default HomeView
+
