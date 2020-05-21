@@ -1,11 +1,16 @@
 import React from "react";
+
 import "./WaterBox.css";
+
+import {
+  BoxesText
+} from './Boxes-style'
 
 export default function WaterBox(props) {
   return (
     <div>
       <div id="water-box" title={props.title}>
-        <div id="water" style={{ top: props.volume + "px" }}>
+        <div id="water" style={{ top: 300- (props.volume*3) + "px" }}>
           <div id="waves">
             <div id="wave" class="wave1"></div>
             <div id="wave" class="wave2"></div>
@@ -14,16 +19,10 @@ export default function WaterBox(props) {
           <div id="water-lvl"></div>
         </div>
       </div>
-      <div style={textStyle}>{props.title}</div>
+      <BoxesText>
+        {props.title}
+      </BoxesText>
       {/*<Percent percent={props.volume}/>*/}
     </div>
   );
 }
-
-const textStyle = {
-  padding: "0.5em 9em",
-  color: "#42a6ff",
-  fontWeight: "bold",
-  fontSize: "1.5em",
-  textTransform: "capitalize",
-};
