@@ -18,4 +18,4 @@ const containerStyle = {
   background: 'white',
   borderRadius: '8px'
 }
-export default WaterBoxContainer;
+export default WaterBoxContainer
