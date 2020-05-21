@@ -1,8 +1,17 @@
 import Styled from 'styled-components'
 
 export const CardContainer = Styled.div`
-  background: #ececec;
-  padding: 30px;
   width: 20vw;
-  height: 30vh;
+  height: 10vh;
+  display: 'flex';
+  flex-direction: column;
+`;
+
+export const CardLabel = Styled.p`
+  font-weight: bold;
+`
+
+export const CardItem = Styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;

@@ -1,12 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-import { Menu, Button } from 'antd';
+import { Menu } from 'antd';
 import {
   PieChartOutlined,
   ExperimentFilled,
   CloseCircleFilled,
-  ControlOutlined,
-  ContainerOutlined,
   MailOutlined,
 } from '@ant-design/icons';
 
@@ -15,7 +13,7 @@ import {Link} from 'react-router-dom'
 import NavUserView from './NavbarUserView-container'
 
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { useHistory, useLocation } from '../../utils/routing';
+import { useHistory } from '../../utils/routing';
 
 import {useAuth} from '../auth/Auth-context'
 import {singout} from '../auth/Auth-action'
