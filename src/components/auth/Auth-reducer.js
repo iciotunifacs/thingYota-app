@@ -19,7 +19,7 @@ export const authReducer = (state, action) => {
     case AuthConstant.LOGIN_REQUEST:
       return { ...state, loading: true };
     case AuthConstant.LOGIN_SUCCESS:
-      return { ...state, loading: false, loggedIn: true, user: {...action.data}, error: null};
+      return { ...state, loading: false, loggedIn: true, user: action.data, error: null};
     case AuthConstant.LOGIN_FAILURE:
       return { ...state, loading: false, loggedIn: false, error: action.error };
     case AuthConstant.LOGOUT:
