@@ -1,3 +1,9 @@
+:root{
+  --water-color: #42a6ff;
+  --purple: #42124c;
+  --red: #b71a30;
+  --pink: #bb083d;
+}
 #water-lvl{
     width:100%;
     height:300px;
@@ -38,8 +44,6 @@
     }
   }
   #water-box{
-    margin-top: 1em;
-    border: ;
     background: #fff;
     padding: 5px;
     border-bottom-left-radius: 0.8em;
@@ -50,7 +54,8 @@
     border-bottom: 4px solid var(--water-color);
     border-right: 4px solid var(--water-color);
     overflow: hidden;
-    margin-left:65px;
+    width:400px;
+    margin: 2em;
   }
   #waves{
     position: relative;
