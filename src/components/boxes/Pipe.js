@@ -29,3 +29,4 @@ const holeStyle = {
     borderRight: '1px solid black',
     borderLeft: '1px solid black'
 }
+
