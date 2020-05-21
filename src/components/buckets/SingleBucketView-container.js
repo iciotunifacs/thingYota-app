@@ -5,6 +5,10 @@ import {
 } from 'antd'
 
 import {
+  BuketHead
+} from './Bucket-style'
+
+import {
   getBucket
 } from './Bucket-action'
 
@@ -12,6 +16,8 @@ import {
   initialState as initialBucketState,
   reducer as bucketReducer
 } from './Buckets-reducer'
+
+import SensorList from '../senseors/SensorList'
 
 const {
   Item
@@ -28,8 +34,6 @@ function SingleBucketView({bucketId}) {
   useEffect(() => {
     getBucket(bucketDispatch, {
       bucketId,
-      limit : 10,
-      page: 0
     })
   }, [bucketId])
 
@@ -47,11 +51,17 @@ function SingleBucketView({bucketId}) {
 
   return (
     <div>
-      <Descriptions title={`Bucket ${data.name}`}>
-        <Item label='Name'>{data.name}'</Item>
-        <Item label='ID'>{data._id}</Item>
-        <Item label='Data de criação'>{data.create_at}</Item>
-      </Descriptions>
+      <BuketHead>
+        <Descriptions title={`Bucket ${data.name}`} layout='horizontal'>
+          <Item label='Name'>{data.name}'</Item>
+          <Item label='ID'>{data._id}</Item>
+          <Item label='Data de criação'>{data.create_at}</Item>
+        </Descriptions>
+      </BuketHead>
+      <div>
+        Sensores
+        <SensorList sensors={data.Sensors}/>
+      </div>
     </div>
   );
 }

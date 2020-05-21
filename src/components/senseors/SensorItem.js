@@ -2,24 +2,47 @@ import React from 'react'
 
 import {
   Card,
-  Descriptions
+  Badge
 } from 'antd'
 
 import {
-  CardContainer
+  CardContainer,
+  CardItem,
+  CardLabel
 } from './Sensor.style'
 
-const {Item} =Descriptions;
+import {
+  formatDistance,
+} from 'date-fns'
 
-function SensorItem({sensor}) {
+import {
+  enUS
+} from 'date-fns/locale'
+
+function SensorItem({ sensor }) {
   return (
-    <CardContainer>
-      <Card title={sensor.name}>
-        <Descriptions>
-          <Item label='Last register'>{sensor.register}</Item>
-        </Descriptions>
-      </Card>
-    </CardContainer>
+    <Card
+      title={sensor.name}
+      style={{width: '20vw'}}
+      extra={
+       <Badge status={sensor.status ? 'success' : 'error'} />
+      }>
+      <CardContainer>
+        <CardItem>
+          <CardLabel>Last register</CardLabel>
+          <p>{formatDistance(new Date(sensor.last_change), Date.now(), {
+            includeSeconds: true,
+            locale: enUS
+          })} </p>
+        </CardItem>
+        {sensor.value && (
+          <CardItem>
+            <CardLabel>Value</CardLabel>
+            <p>{sensor.value.data}</p>
+          </CardItem>
+        )}
+      </CardContainer>
+    </Card>
   )
 }
 
