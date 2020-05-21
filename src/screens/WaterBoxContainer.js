@@ -1,13 +1,13 @@
 import React from 'react'
 import WaterBox from '../components/boxes/WaterBox';
-import Pipe from '../components/boxes/Pipe'
+import Pipe from '../components/boxes/Pipe';
+import Sensor from '../components/boxes/Sensor';
 
 const  WaterBoxContainer = (props) => {
   return (
     <div style={containerStyle}>
       <WaterBox volume={100} title="Caixa 1"/>
       <WaterBox volume={60} title="Caixa 2"/>
-      <Pipe />
     </div>
   )
 }
