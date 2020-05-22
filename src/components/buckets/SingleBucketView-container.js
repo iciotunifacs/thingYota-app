@@ -17,7 +17,7 @@ import {
   reducer as bucketReducer
 } from './Buckets-reducer'
 
-import SensorList from '../senseors/SensorList'
+import SensorView from '../senseors/SensorView-container'
 
 const {
   Item
@@ -60,7 +60,7 @@ function SingleBucketView({bucketId}) {
       </BuketHead>
       <div>
         Sensores
-        <SensorList sensors={data.Sensors}/>
+        <SensorView sensors={data.Sensors}/>
       </div>
     </div>
   );
