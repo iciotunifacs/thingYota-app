@@ -4,6 +4,10 @@ import {
   Descriptions
 } from 'antd'
 
+import socketIo from 'socket.io-client'
+import { useNotification } from "../notification/Notification-context";
+
+
 import {
   BuketHead
 } from './Bucket-style'
@@ -30,6 +34,19 @@ function SingleBucketView({bucketId}) {
     // called,
     data
   }, bucketDispatch] = useReducer(bucketReducer, initialBucketState);
+
+  const [notificationstate, notificationDispatch] = useNotification();
+
+  useEffect(() => {
+    const io = socketIo(`${process.env.REACT_APP_SOCKETIO}/Bucket_${bucketId}`)
+    io.on('updated', (data) =>  {
+      console.log(data.data.Bucket)
+      bucketDispatch({
+        type: "UPDATED",
+        payload: data.data.Bucket
+      })
+    })
+  }, [])
 
   useEffect(() => {
     getBucket(bucketDispatch, {
