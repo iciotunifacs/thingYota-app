@@ -6,7 +6,7 @@ import NotificationProvider from './components/notification/Notification-context
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-function App() {
+function App({}) {
   return (
     <Router>
       <AuthProvider>
