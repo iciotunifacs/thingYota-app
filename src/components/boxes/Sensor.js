@@ -1,13 +1,17 @@
 import React from "react";
 import "./Sensor.css";
 
-export default function Sensor() {
+import {
+  SensorContainer,
+  Sensortoggle
+} from './Boxes-style'
+
+export default function Sensor({status}) {
   return (
-    <div>
-      <div className="sensor-style">
-        <div className="red-glass"></div>
-        <span className="green-glass"></span>
-      </div>
-    </div>
+    <SensorContainer>
+      <div className="red-glass"></div>
+      <Sensortoggle status={status}/>
+      <span className="green-glass"></span>
+    </SensorContainer>
   );
 }

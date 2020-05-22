@@ -34,3 +34,63 @@ export const HoleContainer = Styled.div`
   border-right: "1px solid black";
   border-left: "1px solid black";
 `
+
+export const WaterBoxContainer = Styled.div`
+  background: #fff;
+  padding: 5px;
+  border-bottom-left-radius: 0.8em;
+  border-bottom-right-radius: 0.8em;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  border-left: 4px solid var(--water-color);
+  border-bottom: 4px solid var(--water-color);
+  border-right: 4px solid var(--water-color);
+  overflow: hidden;
+  width: 400px;
+  margin: 2em;
+`
+export const WaterLvlContainer = Styled.div`
+  width: 100%;
+  height: 300px;
+  background: var(--water-color);
+  transition: 2s height;
+  position: relative;
+`
+export const WaveItem = Styled.div`
+  background: url(waveImg);
+  background-size: 400px;
+  box-sizing: border-box;
+  height: 35px;
+`
+
+export const WaveContainer = Styled.div`
+  position: relative;
+  top: 72px;
+`
+export const Water = Styled.div`
+  position: 'relative';
+`
+export const SensorContainer = Styled.div`
+  background: linear-gradient(#e3e3e3, #ccc, #777);
+  width: 70px;
+  height: 100px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: 1px solid #ccc;
+`
+
+export const Sensortoggle = Styled.span`
+  background: ${props => props.status ? "green" : "red"}
+  width: 30px
+  height: 50px;
+  display: block;
+  position: relative;
+  left: 18px;
+  top: 12px;
+box-shadow: ${props => props.status ?
+  'inset 2px 4px 5px #02863c66, inset -2px -4px 10px #02861066,2px 2px 10px #21c100, -2px -2px 10px #2cff00' :
+  'inset 2px 4px 5px #86020266, inset -2px -4px 5px #86020266,2px 2px 2px #d2d2d2, -2px -2px 2px #bfbfbf'}
+  border-radius: 4px;
+`

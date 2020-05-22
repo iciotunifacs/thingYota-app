@@ -3,26 +3,30 @@ import React from "react";
 import "./WaterBox.css";
 
 import {
-  BoxesText
+  BoxesText,
+  WaterBoxContainer,
+  WaterLvlContainer,
+  WaveContainer,
+  WaveItem
 } from './Boxes-style'
 
-export default function WaterBox(props) {
+export default function WaterBox({title, volume}) {
   return (
     <div>
-      <div id="water-box" title={props.title}>
-        <div id="water" style={{ top: 300- (props.volume*3) + "px" }}>
-          <div id="waves">
+      <WaterBoxContainer title={title}>
+        <div style={{ top: `${300-(volume*3)}px`, position: 'relative'}}>
+          <WaveContainer>
             <div id="wave" class="wave1"></div>
             <div id="wave" class="wave2"></div>
             <div id="wave" class="wave3"></div>
-          </div>
-          <div id="water-lvl"></div>
+          </WaveContainer>
+          <WaterLvlContainer/>
         </div>
-      </div>
+      </WaterBoxContainer>
       <BoxesText>
-        {props.title}
+        {title}
       </BoxesText>
-      {/*<Percent percent={props.volume}/>*/}
+      {/*<Percent percent={.volume}/>*/}
     </div>
   );
 }

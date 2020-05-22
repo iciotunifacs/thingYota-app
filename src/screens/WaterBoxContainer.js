@@ -9,6 +9,8 @@ const  WaterBoxContainer = (props) => {
       <WaterBox volume={10} title="Caixa 1"/>
       <WaterBox volume={100} title="Caixa 2"/>
       <Pipe/>
+      <Sensor status={true}/>
+      <Sensor status={false}/>
     </div>
   )
 }
