@@ -17,11 +17,17 @@ import {
 } from './Bucket-action'
 
 import {
+  actives
+} from './Bucket-utils'
+
+import {
   initialState as initialBucketState,
   reducer as bucketReducer
 } from './Buckets-reducer'
 
 import SensorView from '../senseors/SensorView-container'
+
+import WaterBox from '../boxes/WaterBox';
 
 const {
   Item
@@ -40,7 +46,6 @@ function SingleBucketView({bucketId}) {
   useEffect(() => {
     const io = socketIo(`${process.env.REACT_APP_SOCKETIO}/Bucket_${bucketId}`)
     io.on('updated', (data) =>  {
-      console.log(data.data.Bucket)
       bucketDispatch({
         type: "UPDATED",
         payload: data.data.Bucket
@@ -78,6 +83,10 @@ function SingleBucketView({bucketId}) {
       <div>
         Sensores
         <SensorView sensors={data.Sensors}/>
+      </div>
+      <div>
+        Dinamic view
+        <WaterBox title={data.name} volume={Math.round((actives(data.Sensors)/data.Sensors.length)*100)}/>
       </div>
     </div>
   );
