@@ -2,6 +2,7 @@ import React from 'react';
 
 import Main from "./screens/Main"
 import AuthProvider from './components/auth/Auth-context';
+import NotificationProvider from './components/notification/Notification-context'
 
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -9,7 +10,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Main/>
+        <NotificationProvider>
+          <Main/>
+        </NotificationProvider>
       </AuthProvider>
     </Router>
   );
