@@ -7,12 +7,12 @@ import {
   WaterBoxContainer,
   WaterLvlContainer,
   WaveContainer,
-  WaveItem
+  // WaveItem
 } from './Boxes-style'
 
 export default function WaterBox({title, volume}) {
   return (
-    <div>
+    <>
       <WaterBoxContainer title={title}>
         <div style={{ top: `${300-(volume*3)}px`, position: 'relative'}}>
           <WaveContainer>
@@ -27,6 +27,6 @@ export default function WaterBox({title, volume}) {
         {title}
       </BoxesText>
       {/*<Percent percent={.volume}/>*/}
-    </div>
+    </>
   );
 }

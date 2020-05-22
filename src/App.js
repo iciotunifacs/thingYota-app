@@ -6,6 +6,7 @@ import NotificationProvider from './components/notification/Notification-context
 
 import { BrowserRouter as Router } from "react-router-dom";
 
+// eslint-disable-next-line
 function App({}) {
   return (
     <Router>

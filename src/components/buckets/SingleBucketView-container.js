@@ -27,7 +27,7 @@ const {
 function SingleBucketView({bucketId}) {
   const [{
     loading,
-    called,
+    // called,
     data
   }, bucketDispatch] = useReducer(bucketReducer, initialBucketState);
 
