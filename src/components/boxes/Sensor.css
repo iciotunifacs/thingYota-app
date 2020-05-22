@@ -1,0 +1,25 @@
+.red-glass {
+  background: red;
+  width: 30px;
+  height: 50px;
+  display: block;
+  position: relative;
+  left: 18px;
+  top: 12px;
+  box-shadow: inset 2px 4px 5px #86020266, inset -2px -4px 5px #86020266,
+    2px 2px 2px #d2d2d2, -2px -2px 2px #bfbfbf;
+  border-radius: 4px;
+}
+
+.green-glass {
+  background: green;
+  width: 35px;
+  height: 10px;
+  display: block;
+  position: relative;
+  left: 16px;
+  top: 25px;
+  border-radius: 2px;
+  box-shadow: inset 2px 4px 5px #02863c66, inset -2px -4px 10px #02861066,
+    2px 2px 10px #21c100, -2px -2px 10px #2cff00;
+}

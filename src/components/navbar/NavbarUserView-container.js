@@ -1,8 +1,7 @@
 import React from 'react'
 
 import {
-  Avatar,
-  Typography
+  Avatar
 } from 'antd';
 
 import {

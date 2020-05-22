@@ -19,7 +19,17 @@ export const reducer = (state , action) => {
       laoding: false,
       called: true,
       data : action.payload,
-      metadata : action.metadata,
+      metadata : {...state.metadata, ...action.metadata},
+      result: true
+    }
+  }
+  case "UPDATED": {
+    return {
+      ...state,
+      laoding: false,
+      called: true,
+      data : action.payload ? action.payload :state.payload,
+      metadata : {...state.metadata, ...action.metadata},
       result: true
     }
   }

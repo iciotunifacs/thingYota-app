@@ -4,6 +4,10 @@ import {
   Descriptions
 } from 'antd'
 
+import socketIo from 'socket.io-client'
+import { useNotification } from "../notification/Notification-context";
+
+
 import {
   BuketHead
 } from './Bucket-style'
@@ -13,11 +17,17 @@ import {
 } from './Bucket-action'
 
 import {
+  actives
+} from './Bucket-utils'
+
+import {
   initialState as initialBucketState,
   reducer as bucketReducer
 } from './Buckets-reducer'
 
-import SensorList from '../senseors/SensorList'
+import SensorView from '../senseors/SensorView-container'
+
+import WaterBox from '../boxes/WaterBox';
 
 const {
   Item
@@ -27,9 +37,21 @@ const {
 function SingleBucketView({bucketId}) {
   const [{
     loading,
-    called,
+    // called,
     data
   }, bucketDispatch] = useReducer(bucketReducer, initialBucketState);
+
+  const [notificationstate, notificationDispatch] = useNotification();
+
+  useEffect(() => {
+    const io = socketIo(`${process.env.REACT_APP_SOCKETIO}/Bucket_${bucketId}`)
+    io.on('updated', (data) =>  {
+      bucketDispatch({
+        type: "UPDATED",
+        payload: data.data.Bucket
+      })
+    })
+  }, [])
 
   useEffect(() => {
     getBucket(bucketDispatch, {
@@ -60,7 +82,11 @@ function SingleBucketView({bucketId}) {
       </BuketHead>
       <div>
         Sensores
-        <SensorList sensors={data.Sensors}/>
+        <SensorView sensors={data.Sensors}/>
+      </div>
+      <div>
+        Dinamic view
+        <WaterBox title={data.name} volume={Math.round((actives(data.Sensors)/data.Sensors.length)*100)}/>
       </div>
     </div>
   );

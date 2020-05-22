@@ -18,14 +18,14 @@ import { useHistory } from '../../utils/routing';
 import {useAuth} from '../auth/Auth-context'
 import {singout} from '../auth/Auth-action'
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 const NavbarView = (props) => {
 
 
-  const [user, setUser] = useLocalStorage('user');
+  const [, setUser] = useLocalStorage('user');
   const history = useHistory();
-  const [state, dispatch] = useAuth();
+  const [, dispatch] = useAuth();
 
   return (
     <div style={{ height: "100vh" }}>

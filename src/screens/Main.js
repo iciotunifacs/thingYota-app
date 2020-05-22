@@ -3,16 +3,11 @@ import { Layout } from 'antd';
 
 import './Main-style.css';
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import AppRoute from '../layout/AppRoute'
-import PrivateRouter from '../layout/PrivateRoute'
 
 import Navbar from "../components/navbar/Navbarview-container"
 
-import Home from "../components/home/HomeView-container"
-import Statistic from '../components/statistic/StatisticView-container';
-import BucketView from '../components/buckets/BucketView-container'
 import { useAuth } from "../components/auth/Auth-context";
 
 

@@ -5,6 +5,9 @@ export const CardContainer = Styled.div`
   height: 10vh;
   display: 'flex';
   flex-direction: column;
+  flex: 1 0 21%; /* explanation below */
+  margin: 5px;
+  height: 100px;
 `;
 
 export const CardLabel = Styled.p`
@@ -15,3 +18,14 @@ export const CardItem = Styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
+
+export const SensorGridContainer = Styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+export const SensorGridItemContainer = Styled.div`
+  flex: 1 0 21%; /* explanation below */
+  margin: 5px;
+  height: 100px;
+  background-color: blue;
+`
