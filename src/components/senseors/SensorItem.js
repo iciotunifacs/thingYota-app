@@ -1,49 +1,60 @@
-import React from 'react'
+import React from "react";
 
-import {
-  Card,
-  Badge
-} from 'antd'
+import { Card, Badge, Tag, Descriptions, Typography, Statistic } from "antd";
 
-import {
-  CardContainer,
-  CardItem,
-  CardLabel
-} from './Sensor.style'
+import { CardContainer, CardItem, CardLabel } from "./Sensor.style";
 
-import {
-  formatDistance,
-} from 'date-fns'
+import { formatDistance } from "date-fns";
 
-import {
-  enUS
-} from 'date-fns/locale'
+import { ptBR } from "date-fns/locale";
+
+const lastData = (value) =>
+  formatDistance(new Date(value), Date.now(), {
+    includeSeconds: true,
+    locale: ptBR,
+  });
+
+const ValueSwicth = ({ value }) => {
+  switch (typeof value.data) {
+    case "boolean":
+    default:
+      return (
+        <Typography.Title level={4}>
+          {value.data ? "Ativado" : "Desativado"}
+        </Typography.Title>
+      );
+    case "number":
+      return (
+          <Statistic
+            value={value.data}
+            precision={2}
+            suffix={` ${value.unity}`}
+          />
+      );
+  }
+};
 
 function SensorItem({ sensor }) {
   return (
     <Card
       title={sensor.name}
-      style={{width: '20vw'}}
+      style={{ width: "20vw" }}
       extra={
-       <Badge status={sensor.status ? 'success' : 'error'} />
-      }>
-      <CardContainer>
-        <CardItem>
-          <CardLabel>Last register</CardLabel>
-          <p>{formatDistance(new Date(sensor.last_change), Date.now(), {
-            includeSeconds: true,
-            locale: enUS
-          })} </p>
-        </CardItem>
-        {sensor.value && (
-          <CardItem>
-            <CardLabel>Value</CardLabel>
-            <p>{sensor.value.data}</p>
-          </CardItem>
-        )}
-      </CardContainer>
+        <Tag color={sensor.status ? "green" : "red"}>
+          {sensor.status ? "Disponível" : "Indisponível"}
+        </Tag>
+      }
+    >
+      <Descriptions layout='vertical'>
+        <Descriptions.Item>
+          <ValueSwicth value={sensor.value}/>
+        </Descriptions.Item>
+      </Descriptions>
+      <Card.Meta
+        description={`Última atualização ${lastData(sensor.last_change)}`}
+      />
     </Card>
-  )
+  );
 }
 
-export default SensorItem
+export default SensorItem;

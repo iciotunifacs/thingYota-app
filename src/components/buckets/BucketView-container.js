@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BucketList from './Bucket-list';
+import BucketList from './BucketList';
 
 import {
   PageView

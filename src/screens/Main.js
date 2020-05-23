@@ -11,7 +11,7 @@ import Navbar from "../components/navbar/Navbarview-container"
 import { useAuth } from "../components/auth/Auth-context";
 
 
-const { Sider, Content } = Layout;
+const { Sider, Content, Header } = Layout;
 
 
 const MainScreen = (props) => {
@@ -24,10 +24,10 @@ const MainScreen = (props) => {
   return (
     <Layout>
       {loggedIn && (
-        <Sider breakpoint="lg" collapsedWidth="0">
+        <Header breakpoint="lg" collapsedWidth="0">
           <div className="logo" />
           <Navbar updateRender={updateRender}/>
-        </Sider>
+        </Header>
       )}
       <Layout>
         <Content style={{margin: '24px 16px',padding: 24, minHeight: 280,}}>

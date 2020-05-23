@@ -1,20 +1,31 @@
-import React from 'react'
+import React from "react";
 
-import SensotGrid from './SensorGrid'
-import SensorList from './SensorList'
+import { SensorViewContainer } from "./Sensor.style";
 
-const SensorView = ({sensors, scenary}) => {
+import { Typography } from "antd";
+
+import SensotGrid from "./SensorGrid";
+import SensorList from "./SensorList";
+
+const { Title } = Typography;
+
+const SensorSwitch = ({ sensors, scenary }) => {
   switch (scenary) {
     case "list":
-      return (
-        <SensorList sensors={sensors}/>
-      )
-    case 'grid':
+      return <SensorList sensors={sensors} />;
+    case "grid":
     default:
-      return (
-        <SensotGrid sensors={sensors}/>
-      )
+      return <SensotGrid sensors={sensors} />;
   }
-}
+};
 
-export default SensorView
+const SensorView = ({ sensors, scenary }) => {
+  return (
+    <SensorViewContainer>
+      <Title level={3}>Sensores</Title>
+      <SensorSwitch sensors={sensors} scenary={scenary} />
+    </SensorViewContainer>
+  );
+};
+
+export default SensorView;
