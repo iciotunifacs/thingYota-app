@@ -28,9 +28,9 @@ const NavbarView = (props) => {
   const [, dispatch] = useAuth();
 
   return (
-    <div style={{ height: "100vh" }}>
+    <>
       <NavUserView/>
-      <Menu mode="inline" theme="dark">
+      <Menu mode="horizontal" theme="dark" node={2}>
           <Menu.Item key="1">
             <Link to='/statistics'/>
             <PieChartOutlined />
@@ -52,7 +52,7 @@ const NavbarView = (props) => {
           <span>Sair</span>
         </Menu.Item>
       </Menu>
-    </div>
+    </>
   );
 }
 
