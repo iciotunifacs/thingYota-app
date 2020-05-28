@@ -57,7 +57,6 @@ const SingleBucketView = ({ bucketId }) => {
     return <Exceptions type={4} text={"Nenhum reservatório foi encontrado"} />;
   }
 
-  console.log(sensorVolume(data.Sensors));
   return (
     <>
       <Title level={2}>{data.name}</Title>
@@ -76,17 +75,26 @@ const SingleBucketView = ({ bucketId }) => {
           </Item>
         </Descriptions>
       </Card>
-      <SensorView sensors={data.Sensors} />
-      <Actorview actors={data.Actors} />
-      <div>
-        Dinamic view
-        <WaterBox
-          title={data.name}
-          volume={Math.round(
-            (actives(data.Sensors) / sensorVolume(data.Sensors)) * 100
-          )}
-        />
-      </div>
+
+      {data.Sensors.length > 0 && (
+        <SensorView sensors={data.Sensors} />
+      )}
+
+      {data.Actors.length > 0 && (
+        <Actorview actors={data.Actors} />
+      )}
+
+      {data.Sensors.length > 0 && (
+        <div>
+          Dinamic view
+          <WaterBox
+            title={data.name}
+            volume={Math.round(
+              (actives(data.Sensors) / sensorVolume(data.Sensors)) * 100
+            )}
+          />
+        </div>
+      )}
     </>
   );
 };
