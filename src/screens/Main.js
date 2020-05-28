@@ -11,7 +11,7 @@ import Navbar from "../components/navbar/Navbarview-container"
 import { useAuth } from "../components/auth/Auth-context";
 
 
-const { Sider, Content, Header } = Layout;
+const {  Content, Header } = Layout;
 
 
 const MainScreen = (props) => {

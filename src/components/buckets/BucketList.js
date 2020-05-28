@@ -1,7 +1,5 @@
 import React, { useReducer, useEffect } from "react";
 
-import { Link } from "react-router-dom";
-
 import { getBucket } from "./Bucket-action";
 
 import { BucketListContainer } from "./Bucket-style";
@@ -14,6 +12,8 @@ import {
 } from "./Buckets-reducer";
 
 import { Typography } from "antd";
+
+import Exceptions from '../../screens/Exceptions'
 
 const { Title } = Typography;
 
@@ -34,12 +34,12 @@ const BucketList = (props) => {
     return <div>Carregando</div>;
   }
 
-  if (!bucketState.data && bucketState.error) {
-    return <div>Houve um erro</div>;
+  if (bucketState.error) {
+    return <Exceptions type={500} />;
   }
 
-  if (!bucketState.data) {
-    return <div>Lista vaAzia</div>;
+  if ((bucketState.data && bucketState.data.length === 0) || !bucketState.data) {
+    return <Exceptions type={404} text={"Não foram encontrados reservatórios"}/>;
   }
 
   return (

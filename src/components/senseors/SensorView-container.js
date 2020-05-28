@@ -7,9 +7,16 @@ import { Typography } from "antd";
 import SensotGrid from "./SensorGrid";
 import SensorList from "./SensorList";
 
+import Exceptions from '../../screens/Exceptions'
+
 const { Title } = Typography;
 
 const SensorSwitch = ({ sensors, scenary }) => {
+
+  if (sensors.length < 1) return (
+    <Exceptions type='not_have' text="Não há sensores a serem listados" />
+  )
+
   switch (scenary) {
     case "list":
       return <SensorList sensors={sensors} />;
@@ -20,6 +27,7 @@ const SensorSwitch = ({ sensors, scenary }) => {
 };
 
 const SensorView = ({ sensors, scenary }) => {
+
   return (
     <SensorViewContainer>
       <Title level={3}>Sensores</Title>

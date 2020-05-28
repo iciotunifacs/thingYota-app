@@ -1,8 +1,6 @@
 import React from "react";
 
-import { Card, Badge, Tag, Descriptions, Typography, Statistic } from "antd";
-
-import { CardContainer, CardItem, CardLabel } from "./Sensor.style";
+import { Card, Tag, Descriptions, Typography, Statistic } from "antd";
 
 import { formatDistance } from "date-fns";
 
