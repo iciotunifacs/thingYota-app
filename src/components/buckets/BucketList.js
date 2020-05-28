@@ -34,11 +34,11 @@ const BucketList = (props) => {
     return <div>Carregando</div>;
   }
 
-  if (bucketState.error) {
+  if (bucketState.error || !bucketState.data) {
     return <Exceptions type={500} />;
   }
 
-  if ((bucketState.data && bucketState.data.length === 0) || !bucketState.data) {
+  if ((bucketState.data && bucketState.data.length === 0)) {
     return <Exceptions type={404} text={"Não foram encontrados reservatórios"}/>;
   }
 
