@@ -1,10 +1,16 @@
 import React from "react";
 
-import { Card, Tag, Descriptions, Typography, Statistic, Progress } from "antd";
+import { Card, Tag, Descriptions, Typography, Statistic, Switch } from "antd";
+import {
+  ExclamationOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 
 import { formatDistance } from "date-fns";
-
 import { ptBR } from "date-fns/locale";
+
+const { Title } = Typography;
 
 const lastData = (value) =>
   formatDistance(new Date(value), Date.now(), {
@@ -13,13 +19,32 @@ const lastData = (value) =>
   });
 
 const ValueSwicth = ({ value }) => {
+  if (value === undefined || value == null)
+    return (
+      <>
+        <ExclamationOutlined style={{ fontSize: "48px" }} />
+        <Title level={4}>Imdisponivél</Title>
+      </>
+    );
   switch (typeof value.data) {
     case "boolean":
     default:
-      return value.data ? (
-        <Progress type="circle" status="success" />
-      ) : (
-        <Progress type="circle" status="exception" />
+      return (
+        <>
+          {value.data ? (
+            <>
+              <CheckOutlined style={{ fontSize: "48px" }} />
+              <Title level={4}>Em uso</Title>
+            </>
+          ) : (
+            <>
+              <CloseOutlined style={{ fontSize: "48px" }} />
+              <Title level={4}>Parado</Title>
+            </>
+          )}
+          {/* TODO: inserir action para desativar / ativar atuadores  */}
+          {/* <Switch checked={value.data}/> */}
+        </>
       );
     case "number":
       return (
@@ -45,10 +70,7 @@ function SensorItem({ actor }) {
     >
       <Descriptions layout="vertical">
         <Descriptions.Item>
-          {actor.value && actor.value.data && (
-            <ValueSwicth value={actor.value} />
-          )}
-          {!actor.value && <Tag color="yellow">Indisponível</Tag>}
+          <ValueSwicth value={actor.value} />
         </Descriptions.Item>
       </Descriptions>
       <Card.Meta
