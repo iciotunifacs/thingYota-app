@@ -14,6 +14,7 @@ import {
 } from "./Buckets-reducer";
 
 import SensorView from "../senseors/SensorView-container";
+import Actorview from "../actors/ActorView-container";
 import WaterBox from "../boxes/WaterBox";
 
 import Exceptions from "../../screens/Exceptions";
@@ -56,7 +57,7 @@ const SingleBucketView = ({ bucketId }) => {
     return <Exceptions type={4} text={"Nenhum reservatório foi encontrado"} />;
   }
 
-  console.log(sensorVolume(data.Sensors))
+  console.log(sensorVolume(data.Sensors));
   return (
     <>
       <Title level={2}>{data.name}</Title>
@@ -76,6 +77,7 @@ const SingleBucketView = ({ bucketId }) => {
         </Descriptions>
       </Card>
       <SensorView sensors={data.Sensors} />
+      <Actorview actors={data.Actors} />
       <div>
         Dinamic view
         <WaterBox
