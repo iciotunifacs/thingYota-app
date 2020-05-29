@@ -10,6 +10,9 @@ import Home from '../screens/Home'
 import Buckets from '../screens/Buckets'
 import SingleBucket from '../screens/SingleBucket'
 import WaterBoxContainer from '../screens/WaterBoxContainer'
+import Exceptions from '../screens/Exceptions'
+import Profile from '../screens/Profile'
+import Statistics from '../screens/Statistics'
 
 const AppRoute = (props) => {
   return (
@@ -21,7 +24,10 @@ const AppRoute = (props) => {
           <PrivateRoute exact path="/" component={Home}/>
           <PrivateRoute exact path="/buckets" component={Buckets}/>
           <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
-          {/* <Route component={Exceptions({type: 404})}/> */}
+          <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
+          <PrivateRoute exact path="/profile" component={Profile}/>
+          <PrivateRoute exact path="/statistics" component={Statistics}/>
+          <Route component={Exceptions}/>
       </Switch>
   );
 }
