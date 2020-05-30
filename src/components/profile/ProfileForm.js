@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 
-import {
-  Form,
-  Input,
-  Button,
-  Layout,
-  Row,
-  Col,
-  Typography,
-  Tooltip
-} from 'antd';
+import { Form, Input, Button, Layout, Row, Col, Typography } from "antd";
 
-import {Link} from "react-router-dom"
+import md5 from "md5";
 
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { useAuth } from "../auth/Auth-context";
 
-import { useHistory, useLocation } from '../../utils/routing';
-import { useAuth } from '../auth/Auth-context';
+const { Text } = Typography;
 
-const {
-  Text
-} = Typography
-
-const {
-  Content
-} = Layout;
+const { Content } = Layout;
 
 const ProfileForm = (props) => {
   const layout = {
@@ -35,7 +19,7 @@ const ProfileForm = (props) => {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const [{user: userAuth}] = useAuth();
+  const [{ user: userAuth, error }, dispatch] = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPasword] = useState("");
@@ -43,82 +27,124 @@ const ProfileForm = (props) => {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
 
-  const [user, setUser] = useLocalStorage('user');
-  const [state, dispatch] = useAuth();
+  const _firstname = useMemo(() => userAuth.first_name || "", [userAuth]);
+  const _lastname = useMemo(() => userAuth.last_name || "", [userAuth]);
+  const _username = useMemo(() => userAuth.username || "", [userAuth]);
+  const _email = useMemo(() => userAuth.email || "", [userAuth]);
+  const _password = useMemo(() => userAuth.password || "", [userAuth]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const hasChanges =
+    username == _username &&
+    firstname == _firstname &&
+    lastname == _lastname &&
+    email == _email;
 
   useEffect(() => {
-    let userData = user;
-    if (userData) {
-      console.log(userData)
-      let {usermame, first_name, email } = userData;
-      setUsername(usermame || '');
-      setFirstname(first_name || '');
-      setLastname(userData.last_name || '');
-      setEmail(email || '');
+    if (userAuth) {
+      let { username, first_name, last_name, email } = userAuth;
+      setUsername(username);
+      setFirstname(first_name);
+      setLastname(last_name);
+      setEmail(email);
     }
-  }, [user])
+  }, [userAuth]);
 
-  function handleSubmit(event) {
-    event.preventDefault()
-  }
-
+  console.log(hasChanges, username, _username)
+  // ||password !== _password;
   return (
     <Layout style={{ backgroundColor: "#FAFAFA" }}>
-      <Content>
-        <Row>
-          <Col span={6} offset={8}>
-            <Form {...layout} name="basic" initialValues={{ remember: true }}>
-              <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+      {userAuth && (
+        <Content>
+          <Row>
+            <Col span={6} offset={8}>
+              <Form
+                {...layout}
+                name="basic"
+                initialValues={{
+                  firstname: _firstname,
+                  lastname: _lastname,
+                  username: _username,
+                  email: _email,
+                }}
               >
-                <Input value={username} onChange={data => setUsername(data.target.value)} />
-              </Form.Item>
-              <Form.Item
-                label="First name"
-                name="firstname"
-                rules={[{ required: true, message: 'Please input your first name!' }]}
-              >
-                <Input value={firstname} onChange={data => setFirstname(data.target.value)} />
-              </Form.Item>
-              <Form.Item
-                label="Last name"
-                name="lastname"
-                rules={[{ required: true, message: 'Please input your Last name!' }]}
-              >
-                <Input value={lastname} onChange={data => setLastname(data.target.value)} />
-              </Form.Item>
-              <Form.Item
-                label="E-mail"
-                name="email"
-                rules={[{ required: true, message: 'Please input your e-mail!' }]}
-              >
-                <Input value={email} onChange={data => setEmail(data.target.value)} />
-              </Form.Item>
-
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-              >
-                <Input.Password value={password} onChange={data => setPasword(data.target.value)} />
-              </Form.Item>
-
-              {state.error && (
-                <Form.Item {...tailLayout}>
-                  <Text type="danger"> {state.error.response.data.message}</Text>
+                <Form.Item
+                  label="Username"
+                  name="username"
+                  rules={[
+                    { required: true, message: "Please input your username!" },
+                  ]}
+                >
+                  <Input
+                    value={username}
+                    onChange={(data) => setUsername(data.target.value)}
+                  />
                 </Form.Item>
-              )}
-              <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit" onClick={handleSubmit}>Apply changes</Button>
-              </Form.Item>
-            </Form>
-          </Col>
-        </Row>
-      </Content>
+                <Form.Item
+                  label="First name"
+                  name="firstname"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your first name!",
+                    },
+                  ]}
+                >
+                  <Input
+                    value={firstname}
+                    onChange={(data) => setFirstname(data.target.value)}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Last name"
+                  name="lastname"
+                  rules={[
+                    { required: true, message: "Please input your Last name!" },
+                  ]}
+                >
+                  <Input
+                    value={lastname}
+                    onChange={(data) => setLastname(data.target.value)}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="E-mail"
+                  name="email"
+                  rules={[
+                    { required: true, message: "Please input your e-mail!" },
+                  ]}
+                >
+                  <Input
+                    value={email}
+                    onChange={(data) => setEmail(data.target.value)}
+                  />
+                </Form.Item>
+
+                {error && (
+                  <Form.Item {...tailLayout}>
+                    <Text type="danger"> {error.response.data.message}</Text>
+                  </Form.Item>
+                )}
+                <Form.Item {...tailLayout}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    onClick={handleSubmit}
+                    disabled={hasChanges}
+                  >
+                    Apply changes
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Col>
+          </Row>
+        </Content>
+      )}
     </Layout>
   );
-}
+};
 
 export default ProfileForm;
