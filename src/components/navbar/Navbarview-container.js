@@ -10,8 +10,6 @@ import {
 
 import {Link} from 'react-router-dom'
 
-import NavUserView from './NavbarUserView-container'
-
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useHistory } from '../../utils/routing';
 
@@ -28,9 +26,7 @@ const NavbarView = (props) => {
   const [, dispatch] = useAuth();
 
   return (
-    <>
-      <NavUserView/>
-      <Menu mode="horizontal" theme="dark" node={2}>
+      <Menu mode="horizontal" theme="dark" >
           <Menu.Item key="1">
             <Link to='/statistics'/>
             <PieChartOutlined />
@@ -52,7 +48,6 @@ const NavbarView = (props) => {
           <span>Sair</span>
         </Menu.Item>
       </Menu>
-    </>
   );
 }
 
