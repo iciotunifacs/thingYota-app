@@ -43,7 +43,7 @@ const ValueSwicth = ({ value }) => {
             </>
           )}
           {/* TODO: inserir action para desativar / ativar atuadores  */}
-          {/* <Switch checked={value.data}/> */}
+          <Switch checked={value.data}/>
         </>
       );
     case "number":
