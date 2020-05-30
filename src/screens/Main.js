@@ -1,41 +1,44 @@
-import React, {useState, useCallback} from "react";
-import { Layout } from 'antd';
+import React, { useState, useCallback } from "react";
 
-import './Main-style.css';
+import { Layout } from "antd";
 
+import AppRoute from "../layout/AppRoute";
 
-import AppRoute from '../layout/AppRoute'
-
-import Navbar from "../components/navbar/Navbarview-container"
+import Navbar from "../components/navbar/Navbarview-container";
 
 import { useAuth } from "../components/auth/Auth-context";
 
+import NavUserView from '../components/navbar/NavbarUserView-container'
 
-const {  Content, Header } = Layout;
+import useLocalstorage from '../hooks/useLocalStorage'
 
+const { Content, Header } = Layout;
 
 const MainScreen = (props) => {
-
   const [render, setRender] = useState(1);
-  const [{loggedIn}] = useAuth();
+  const [{ loggedIn }] = useAuth();
 
-  const updateRender = useCallback(item => setRender(item.key),[render]);
+  const updateRender = useCallback((item) => setRender(item.key), [render]);
 
   return (
     <Layout>
-      {loggedIn && (
-        <Header breakpoint="lg" collapsedWidth="0">
-          <div className="logo" />
-          <Navbar updateRender={updateRender}/>
+      {(loggedIn) && (
+        <Header
+          breakpoint="lg"
+          collapsedWidth="0"
+          style={{ position: "fixed", zIndex: 1, width: "100%" }}
+        >
+          <NavUserView/>
+          <Navbar updateRender={updateRender} />
         </Header>
       )}
-      <Layout>
-        <Content style={{margin: '24px 16px',padding: 24, minHeight: 280,}}>
-          <AppRoute/>
+      <Layout hasSider style={{minHeight: '100vh'}}>
+        <Content style={{ margin: "24px 16px", padding: 100, height: '100vh' }}>
+          <AppRoute />
         </Content>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
 export default MainScreen;
