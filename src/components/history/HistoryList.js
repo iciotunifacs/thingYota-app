@@ -30,15 +30,16 @@ const HistoryList = (props) => {
     });
   }, [props]);
 
-  if (historyState.loading) {
+
+  if (historyState.loading || !historyState.called) {
     return <div>Carregando</div>;
   }
 
-  if (historyState.error || !historyState.history) {
+  if (historyState.error) {
     return <Exceptions type={500} />;
   }
 
-  if ((historyState.history && historyState.history.length === 0)) {
+  if (historyState.called && historyState.history && historyState.history.length === 0) {
     return <Exceptions type={404} text={"Não foram encontrados reservatórios"}/>;
   }
 

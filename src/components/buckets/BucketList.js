@@ -4,7 +4,7 @@ import { getBucket } from "./Bucket-action";
 
 import { BucketListContainer } from "./Bucket-style";
 
-import BucketItem from './BucketItem'
+import BucketItem from "./BucketItem";
 
 import {
   initialState as initialBucketState,
@@ -13,7 +13,7 @@ import {
 
 import { Typography } from "antd";
 
-import Exceptions from '../../screens/Exceptions'
+import Exceptions from "../../screens/Exceptions";
 
 const { Title } = Typography;
 
@@ -30,25 +30,31 @@ const BucketList = (props) => {
     });
   }, [props]);
 
-  if (bucketState.loading) {
+  if (bucketState.loading || !bucketState.called) {
     return <div>Carregando</div>;
   }
 
-  if (bucketState.error || !bucketState.data) {
+  if (bucketState.error && !bucketState.loading && bucketState.called) {
     return <Exceptions type={500} />;
   }
 
-  if ((bucketState.data && bucketState.data.length === 0)) {
-    return <Exceptions type={404} text={"Não foram encontrados reservatórios"}/>;
+  if (
+    (!bucketState.data && bucketState.called) ||
+    (bucketState.called &&
+      bucketState.data &&
+      bucketState.data.length === 0 &&
+      !bucketState.loading)
+  ) {
+    return (
+      <Exceptions type={404} text={"Não foram encontrados reservatórios"} />
+    );
   }
 
   return (
     <BucketListContainer>
       <Title level={2}>Reservatórios</Title>
       {bucketState.data.map((bucket) => {
-        return (
-          <BucketItem bucket={bucket}/>
-        );
+        return <BucketItem bucket={bucket} />;
       })}
     </BucketListContainer>
   );

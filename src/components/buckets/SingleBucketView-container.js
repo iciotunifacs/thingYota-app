@@ -23,7 +23,7 @@ const { Item } = Descriptions;
 const { Title } = Typography;
 
 const SingleBucketView = ({ bucketId }) => {
-  const [{ loading, called, data }, bucketDispatch] = useReducer(
+  const [{ loading, called, data, error }, bucketDispatch] = useReducer(
     bucketReducer,
     initialBucketState
   );
@@ -49,12 +49,12 @@ const SingleBucketView = ({ bucketId }) => {
     return <div>Carregando</div>;
   }
 
-  if (!bucketId) {
-    return <div>Não é valido</div>;
+  if ( error ) {
+    return <Exceptions type={500} />;
   }
 
-  if (!data && called) {
-    return <Exceptions type={4} text={"Nenhum reservatório foi encontrado"} />;
+  if ((called && !data && !loading) || !bucketId) {
+    return <Exceptions type={404} text={"Não foi encontrado reservatório"}/>;
   }
 
   return (
