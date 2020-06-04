@@ -7,22 +7,33 @@ import {
   WaterBoxContainer,
   WaterLvlContainer,
   WaveContainer,
+  BottomBox
   // WaveItem
 } from './Boxes-style'
 
-export default function WaterBox({title, volume}) {
+import WaterContainer from './WaterContainer.js'
+const sizes = {
+  sm:{
+    tamAgua:'40px',
+    topBase: '0',
+    tamCaixa: '50px'//height e width
+  },
+  md:{
+    tamAgua:'136px',
+    topBase: '0',
+    tamCaixa: '150px'
+  },
+  lg:{
+    tamAgua:'300px',
+    topBase: '88',
+    tamCaixa: '150px'
+  }
+}
+const {sm, md, lg} = sizes;
+export default function WaterBox({title, volume, size}) {
   return (
     <>
-      <WaterBoxContainer title={title}>
-        <div style={{ top: `${300-(volume*3)}px`, position: 'relative'}}>
-          <WaveContainer>
-            <div id="wave" class="wave1"></div>
-            <div id="wave" class="wave2"></div>
-            <div id="wave" class="wave3"></div>
-          </WaveContainer>
-          <WaterLvlContainer/>
-        </div>
-      </WaterBoxContainer>
+       <WaterContainer proportions= {lg} volume = {volume} />
       <BoxesText>
         {title}
       </BoxesText>

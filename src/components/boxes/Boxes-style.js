@@ -48,6 +48,7 @@ export const WaterBoxContainer = Styled.div`
   overflow: hidden;
   width: 400px;
   margin: 2em;
+  box-shadow: inset -4px -4px #fff, inset 4px -4px #fff;
 `
 export const WaterLvlContainer = Styled.div`
   width: 100%;
@@ -55,6 +56,8 @@ export const WaterLvlContainer = Styled.div`
   background: var(--water-color);
   transition: 2s height;
   position: relative;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 `
 export const WaveItem = Styled.div`
   background: url(waveImg);
@@ -93,4 +96,15 @@ box-shadow: ${props => props.status ?
   'inset 2px 4px 5px #02863c66, inset -2px -4px 10px #02861066,2px 2px 10px #21c100, -2px -2px 10px #2cff00' :
   'inset 2px 4px 5px #86020266, inset -2px -4px 5px #86020266,2px 2px 2px #d2d2d2, -2px -2px 2px #bfbfbf'}
   border-radius: 4px;
+`
+export const BottomBox = Styled.span`
+  width: 100%;
+  height: 4px;
+  background: #fff;
+  position: absolute;
+  right: 1px;
+  z-index: 99999;
+  bottom: 0.010em;
+  border-bottom-left-radius: 2px;
+border-bottom-right-radius: 2px;
 `

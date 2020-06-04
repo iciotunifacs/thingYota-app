@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, Button, Input} from 'antd';
+import './formNormalize.css';
 
 
     const layout = {

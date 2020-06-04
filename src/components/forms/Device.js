@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
+import './formNormalize.css';
 
 const { Option } = Select;
 
