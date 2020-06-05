@@ -13,7 +13,8 @@ import WaterBoxContainer from '../screens/WaterBoxContainer'
 import Exceptions from '../screens/Exceptions'
 import Profile from '../screens/Profile'
 import Statistics from '../screens/Statistics'
-import DeviceScreen from '../screens/DeviceScreen';
+import Devices from '../screens/Devices';
+import DeviceCreate from '../screens/Device-create';
 import ActuatorScreen from '../screens/ActuatorScreen';
 import SensorScreen from '../screens/SensorScreen';
 
@@ -24,9 +25,10 @@ const AppRoute = (props) => {
           <Route exact path="/singup" component={Singup}/>
           <Route exact path="/datasheet" component={Home}/>
           <Route exact path="/box" component={WaterBoxContainer} />
-          <Route exact path="/forms/device" component={DeviceScreen} />
           <Route exact path="/forms/sensor" component={SensorScreen} />
           <Route exact path="/forms/actuator" component={ActuatorScreen} />
+          <PrivateRoute exact path="/devices" component={Devices} />
+          <PrivateRoute exact path="/devices/create" component={DeviceCreate} />
           <PrivateRoute exact path="/" component={Home}/>
           <PrivateRoute exact path="/buckets" component={Buckets}/>
           <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
