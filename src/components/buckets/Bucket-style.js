@@ -6,5 +6,12 @@ export const BuketHead = Styled.div`
 export const BucketListContainer = Styled.div`
   width: 80%;
   padding: 10px;
-  background-color:
+`
+
+export const MiniGrid = Styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 `

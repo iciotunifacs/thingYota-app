@@ -54,6 +54,5 @@ border-bottom: 4px solid var(--water-color);
 border-right: 4px solid var(--water-color);
 overflow: hidden;
 width: 400px;
-margin: 2em;
 box-shadow: inset -4px -4px #fff, inset 4px -4px #fff;
 }

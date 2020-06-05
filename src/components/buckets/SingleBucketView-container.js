@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 
+import {MiniGrid} from './Bucket-style'
+
 import { Descriptions, Card, Typography, Statistic } from "antd";
 
 import socketIo from "socket.io-client";
@@ -49,53 +51,47 @@ const SingleBucketView = ({ bucketId }) => {
     return <div>Carregando</div>;
   }
 
-  if ( error ) {
+  if (error) {
     return <Exceptions type={500} />;
   }
 
   if ((called && !data && !loading) || !bucketId) {
-    return <Exceptions type={404} text={"Não foi encontrado reservatório"}/>;
+    return <Exceptions type={404} text={"Não foi encontrado reservatório"} />;
   }
 
   return (
     <>
       <Title level={2}>{data.name}</Title>
-      <Card style={{ width: "75%" }}>
+      <Card>
         <Descriptions layout="vertical">
           <Item label="Name">{data.name}'</Item>
           <Item label="Data de criação">{data.create_at}</Item>
           <Item label={`Volume (${data.volume.data.unity})`}>
-            <Statistic
-              precision={1}
-              value={Math.round(
-                actives(data.Sensors) / sensorVolume(data.Sensors)
+            <MiniGrid >
+              {data.Sensors.length > 0 && (
+                <WaterBox
+                  title={data.name}
+                  size="small"
+                  volume={Math.round(
+                    (actives(data.Sensors) / sensorVolume(data.Sensors)) * 100
+                  )}
+                />
               )}
-              suffix={`/${data.volume.data.value}`}
-            />
+              <Statistic
+                precision={1}
+                value={Math.round(
+                  actives(data.Sensors) / sensorVolume(data.Sensors)
+                )}
+                suffix={`/${data.volume.data.value}`}
+              />
+            </MiniGrid>
           </Item>
         </Descriptions>
       </Card>
 
-      {data.Sensors.length > 0 && (
-        <SensorView sensors={data.Sensors} />
-      )}
+      {data.Sensors.length > 0 && <SensorView sensors={data.Sensors} />}
 
-      {data.Actors.length > 0 && (
-        <Actorview actors={data.Actors} />
-      )}
-
-      {data.Sensors.length > 0 && (
-        <div>
-          Dinamic view
-          <WaterBox
-            title={data.name}
-            size='small'
-            volume={Math.round(
-              (actives(data.Sensors) / sensorVolume(data.Sensors)) * 100
-            )}
-          />
-        </div>
-      )}
+      {data.Actors.length > 0 && <Actorview actors={data.Actors} />}
     </>
   );
 };
