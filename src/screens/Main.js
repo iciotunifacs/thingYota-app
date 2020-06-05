@@ -33,7 +33,7 @@ const MainScreen = (props) => {
         </Header>
       )}
       <Layout hasSider style={{minHeight: '100vh'}}>
-        <Content style={{ margin: "24px 16px", padding: 100, height: '100vh' }}>
+        <Content style={{padding: 100, height: '100vh' }}>
           <AppRoute />
         </Content>
       </Layout>
