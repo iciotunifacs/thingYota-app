@@ -89,6 +89,7 @@ const SingleBucketView = ({ bucketId }) => {
           Dinamic view
           <WaterBox
             title={data.name}
+            size='small'
             volume={Math.round(
               (actives(data.Sensors) / sensorVolume(data.Sensors)) * 100
             )}

@@ -1,20 +1,17 @@
 import React from "react";
-import { Form, Input, Button, Select } from "antd";
-// import './formNormalize.css';
+import { Form, Input, Button, Layout, Row, Col, Typography } from "antd";
 
-import { FormContainer } from "./Device-style";
-
-const { Option } = Select;
+const { Content } = Layout;
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 32 },
 };
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const Device = () => {
+const Device = (props) => {
   return (
     <Form {...layout} name="control-hooks">
       <Form.Item name="name" label="Device name" rules={[{ required: true }]}>
