@@ -33,10 +33,10 @@ const SingleBucketView = ({ bucketId }) => {
   useEffect(() => {
     const io = socketIo(`${process.env.REACT_APP_SOCKETIO}/Bucket_${bucketId}`);
     io.on("updated", (payload) => {
-      if (payload && payload.data.Bucket)
+      if (payload && payload.Bucket)
         bucketDispatch({
           type: "UPDATED",
-          payload: payload.data.Bucket,
+          payload: payload.Bucket,
         });
     });
   }, []);
@@ -65,7 +65,7 @@ const SingleBucketView = ({ bucketId }) => {
       <Card>
         <Descriptions layout="vertical">
           <Item label="Name">{data.name}'</Item>
-          <Item label="Data de criação">{data.create_at}</Item>
+          <Item label="Data de criação">{data.created_at}</Item>
           <Item label={`Volume (${data.volume.data.unity})`}>
             <MiniGrid >
               {data.Sensors.length > 0 && (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
-import './formNormalize.css';
+// import './formNormalize.css';
 
 const { Option } = Select;
 
@@ -25,7 +25,7 @@ const Device = () => {
       <Form.Item name="name" label="Device name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      
+
       <Form.Item name="mac" label="Mac address" rules={[{ required: true }]}>
         <Input />
       </Form.Item>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Select, Switch } from 'antd';
-import './formNormalize.css';
+// import './formNormalize.css';
 
 const { Option } = Select;
 
@@ -26,7 +26,7 @@ const Sensor = () => {
       <Form.Item name="sensorName" label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      
+
       <Form.Item name="sensorType" label="Sensor type" rules={[{ required: true }]}>
         <Select
           placeholder="Select a type for the sensor"
