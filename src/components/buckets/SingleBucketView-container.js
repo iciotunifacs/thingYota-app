@@ -33,10 +33,10 @@ const SingleBucketView = ({ bucketId }) => {
   useEffect(() => {
     const io = socketIo(`${process.env.REACT_APP_SOCKETIO}/Bucket_${bucketId}`);
     io.on("updated", (payload) => {
-      if (payload && payload.Bucket)
+      if (payload && payload.data.Bucket)
         bucketDispatch({
           type: "UPDATED",
-          payload: payload.Bucket,
+          payload: payload.data.Bucket,
         });
     });
   }, []);
