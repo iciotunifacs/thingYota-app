@@ -1,5 +1,12 @@
-import React from "react";
-import { Form, Input, Button, Layout, Row, Col, Typography } from "antd";
+import React, { useReducer, useState, useEffect } from "react";
+import { Form, Input, Button, Layout, notification} from "antd";
+
+import {
+  initialState as initialDeviceState,
+  reducer as deviceReducer,
+} from "./Device-reducer";
+
+import { createDevice } from "./Device-action";
 
 const { Content } = Layout;
 
@@ -11,23 +18,59 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const openNotification = ({setShowAlet}) => {
+  notification.open({
+    message: "Sucesso",
+    description: "Elemento Criado",
+    onClick: () => setShowAlet(false),
+  });
+};
 const Device = (props) => {
+  const [macAddtes, setMacAddres] = useState("");
+  const [name, setName] = useState("");
+  const [showAlert, setShowAlet] = useState(false);
+
+  const [{ called, laoding, result, error }, deviceDispatch] = useReducer(
+    deviceReducer,
+    initialDeviceState
+  );
+
+  useEffect(() => {
+    if (called && result) {
+      setShowAlet(true);
+    }
+  }, [called, result]);
   return (
-    <Form {...layout} name="control-hooks">
-      <Form.Item name="name" label="Device name" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
+    <>
+      <Form {...layout} name="control-hooks">
+        <Form.Item name="name" label="Device name" rules={[{ required: true }]}>
+          <Input onChange={(e) => setName(e.target.value)} />
+        </Form.Item>
 
-      <Form.Item name="mac" label="Mac address" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
+        <Form.Item name="mac" label="Mac address" rules={[{ required: true }]}>
+          <Input onChange={(e) => setMacAddres(e.target.value)} />
+        </Form.Item>
 
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item {...tailLayout}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={(e) => {
+              createDevice(deviceDispatch, {
+                mac_addres: macAddtes,
+                name,
+              });
+              setShowAlet(true)
+            }}
+          >
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+      {showAlert && (
+        <openNotification setShowAlet={setShowAlet}/>
+      )}
+    </>
   );
 };
 
