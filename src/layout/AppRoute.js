@@ -8,6 +8,7 @@ import Login from "../screens/Login";
 import Singup from "../screens/Singup";
 import Home from '../screens/Home'
 import Buckets from '../screens/Buckets'
+import BucketCreate from '../screens/Bucket-create'
 import SingleBucket from '../screens/SingleBucket'
 import WaterBoxContainer from '../screens/WaterBoxContainer'
 import Exceptions from '../screens/Exceptions'
@@ -28,6 +29,7 @@ const AppRoute = () => {
           <PrivateRoute exact path="/devices" component={Devices} />
           <PrivateRoute exact path="/devices/create" component={DeviceCreate} />
           <PrivateRoute exact path="/buckets" component={Buckets}/>
+          <PrivateRoute exact path="/buckets/create" component={BucketCreate}/>
           <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
           <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
           <PrivateRoute exact path="/profile" component={Profile}/>
