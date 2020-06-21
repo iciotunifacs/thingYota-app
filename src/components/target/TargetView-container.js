@@ -5,7 +5,7 @@ import {
 
 const TargetView = (props) => {
 
-  let { data , target, setData, setTarget } = props;
+  let { data , target, setTarget } = props;
   const [select, setSelect] = useState([]);
 
   data = data.map((item, key) => {

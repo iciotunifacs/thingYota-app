@@ -2,7 +2,7 @@ import React from "react";
 import BucketForm from "./BucketForm";
 
 import { FormContainer } from "./Bucket-style";
-import { Typography} from "antd";
+import { Typography } from "antd";
 
 import { PageView } from "../../Base-style";
 
@@ -13,7 +13,7 @@ const BucketCreateView = (props) => {
     <PageView>
       <Title level={2}>Add an bucket</Title>
       <FormContainer>
-            <BucketForm />
+        <BucketForm />
       </FormContainer>
     </PageView>
   );

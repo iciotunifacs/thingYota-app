@@ -1,22 +1,34 @@
-import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  InputNumber,
-  Switch,
-} from "antd";
+import React, { useState, useReducer, useEffect } from "react";
+import { Form, Input, Button, Select, InputNumber, Switch } from "antd";
 
-import Target from '../target/TargetView-container'
+import Target from "../target/TargetView-container";
+
+import {
+  initialState as initialSensorsState,
+  reducer as sensorsReducer,
+} from "../senseors/Sensor-reducer";
+import { getSensors } from "../senseors/Sensor-action";
+import { mockSensorsForTarget } from "../senseors/Sensor-utils";
 
 const BucketForm = (props) => {
-  const [sensorList, setSensorlist] = useState([
-    {title: "sensor 1", description: "sensor 1"},
-    {title: "sensor 2", description: "sensor 2"}
-  ]);
+  const [sensorsState, sensorsDispatch] = useReducer(
+    sensorsReducer,
+    initialSensorsState
+  );
+
   const [selectSensor, setSelectSensor] = useState([]);
-  const [actorList, setActorlist] = useState([]);
+  const [actor, setActor] = useState([]);
+  const [selectActor, setSelectActor] = useState([]);
+
+  useEffect(() => {
+    getSensors(sensorsDispatch, {
+      params: {populate: true}
+    });
+  }, []);
+
+  if (sensorsState.loading) return <div>Loading....</div>;
+
+  if (sensorsState.error) return <div>Error...</div>;
 
   return (
     <Form
@@ -41,12 +53,14 @@ const BucketForm = (props) => {
       <Form.Item label="Status">
         <Switch />
       </Form.Item>
-      <Target
-        data={sensorList}
-        setData={setSensorlist}
-        target={selectSensor}
-        setTarget={setSelectSensor}
-      />
+      {sensorsState.data && (
+        <Target
+          data={mockSensorsForTarget(sensorsState.data)}
+          target={selectSensor}
+          setTarget={setSelectSensor}
+        />
+      )}
+      <Target data={actor} target={selectActor} setTarget={setSelectSensor} />
     </Form>
   );
 };
