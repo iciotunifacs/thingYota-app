@@ -1,19 +1,45 @@
 
-import React from "react";
+import React, {useEffect} from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../components/auth/Auth-context";
+import useLocalStorage from "../hooks/useLocalStorage";
 
-function PrivateRoute({ component: Component, ...rest }) {
-  const [{loggedIn}] = useAuth();
+import {useHistory} from '../utils/routing'
+
+import authConstants from '../components/auth/Auth-constant'
+
+function PrivateRoute(props) {
+  const { component: Component, ...rest } = props
+  const history = useHistory();
+  const [{loggedIn}, dispatch] = useAuth();
+  const [user] = useLocalStorage("user");
+
+  useEffect(() => {
+    if (loggedIn && user) return;
+
+    if (!loggedIn && !user) {
+      history.push('/login');
+      return;
+    }
+
+    if (user) {
+      dispatch({
+        type: authConstants.LOGIN_SUCCESS,
+        data: user
+      });
+    }
+
+  },[])
+
 
   return (
     <Route
-      {...rest}
+      {...props}
       render={props =>
-        loggedIn ? (
+        loggedIn && user ? (
           <Component {...props} />
         ) : (
-            <Redirect to="/login" />
+            <div>Carregando</div>
           )
       }
     />

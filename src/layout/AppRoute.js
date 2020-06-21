@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router ,Route, Switch } from "react-router-dom";
 
 import PrivateRoute from './PrivateRoute';
 
@@ -18,18 +18,15 @@ import DeviceCreate from '../screens/Device-create';
 import ActuatorScreen from '../screens/ActuatorScreen';
 import SensorScreen from '../screens/SensorScreen';
 
-const AppRoute = (props) => {
+const AppRoute = () => {
   return (
+    // <Router>
       <Switch>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/singup" component={Singup}/>
-          <Route exact path="/datasheet" component={Home}/>
-          <Route exact path="/box" component={WaterBoxContainer} />
-          <Route exact path="/forms/sensor" component={SensorScreen} />
-          <Route exact path="/forms/actuator" component={ActuatorScreen} />
+          <PrivateRoute exact path="/" component={Home}/>
           <PrivateRoute exact path="/devices" component={Devices} />
           <PrivateRoute exact path="/devices/create" component={DeviceCreate} />
-          <PrivateRoute exact path="/" component={Home}/>
           <PrivateRoute exact path="/buckets" component={Buckets}/>
           <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
           <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket}/>
@@ -37,6 +34,7 @@ const AppRoute = (props) => {
           <PrivateRoute exact path="/statistics" component={Statistics}/>
           <Route component={Exceptions}/>
       </Switch>
+    // </Router>
   );
 }
 
