@@ -3,7 +3,8 @@ export const mockSensorsForTarget = (sensors) => {
     let newSensor = {
       ...sensor,
       key: sensor._id.toString(),
-      title: sensor.name
+      title: sensor.name,
+      type: "Sensor"
     }
 
     if (sensor.device_parent && sensor.device_parent.name) {

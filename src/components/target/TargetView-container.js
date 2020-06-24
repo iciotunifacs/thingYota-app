@@ -8,8 +8,8 @@ const TargetView = (props) => {
   let { data , target, setTarget } = props;
   const [select, setSelect] = useState([]);
 
-  data = data.map((item, key) => {
-    return { ...item, key: key.toString() };
+  data = data.map((item) => {
+    return { ...item, key: item.key.toString() };
   });
 
   const handleChange = (nextTargetKeys, direction, moveKeys) => {

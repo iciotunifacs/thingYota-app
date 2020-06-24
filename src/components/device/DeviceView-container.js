@@ -1,11 +1,11 @@
 import React from "react";
+
+import { Link } from "../../utils/routing";
 import { Button } from "antd";
 
 import { PageView } from "../../Base-style";
 
 import DeviceList from './DeviceList'
-
-import { Link } from "../../utils/routing";
 
 function DeviceView() {
   return (

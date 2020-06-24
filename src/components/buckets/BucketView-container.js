@@ -1,16 +1,21 @@
 import React from 'react';
 
+import { Button } from "antd";
+import { Link } from "../../utils/routing";
+
 import {
   PageView
 } from '../../Base-style'
 
-import BucketForm from './BucketForm'
+
 import BucketList from './BucketList';
 
 function BucketView() {
   return (
     <PageView>
-      <BucketForm/>
+      <Link to="/buckets/create">
+        <Button> Criar dispositivo</Button>
+      </Link>
       <BucketList/>
     </PageView>
   );

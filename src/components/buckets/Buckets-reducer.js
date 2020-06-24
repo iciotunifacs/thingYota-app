@@ -42,6 +42,16 @@ export const reducer = (state , action) => {
       result: false
     }
   }
+  case "CREATED": {
+    return {
+      ...state,
+      laoding: false,
+      called: true,
+      error: null,
+      result: true,
+      data: action.payload
+    }
+  }
   default:
     return state
   }
