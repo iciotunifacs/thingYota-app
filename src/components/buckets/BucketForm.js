@@ -63,12 +63,16 @@ const BucketForm = (props) => {
   const [name, setName] = useState("");
   const [type, setType] = useState("whater-sensor");
   const [volume, setVolume] = useState(1);
-  const [state, setState] = useState(true);
+  // const [state, setState] = useState(true);
+  const [complete, setComplete] = useState(false)
 
   const handleCreate = (e) => {
     createNewBucket(bucketDispatch, {
       name,
       type,
+      volume: {
+        data: {value: volume, entity: "L"}
+      },
       sensors: sensorsState.data.filter((item) =>
         selectSensor.includes(item._id)
       ),
@@ -76,7 +80,7 @@ const BucketForm = (props) => {
         selectActor.includes(item._id)
       ),
     }).then(data => {
-      console.log("sucess");
+      setComplete(data)
     })
   }
 
@@ -150,10 +154,6 @@ const BucketForm = (props) => {
           onChange={(e) => setVolume(parseFloat(e))}
         />
       </Form.Item>
-      <Form.Item label="Status">
-        <Switch checked={state} onChange={(e) => setState(!state)} />
-      </Form.Item>
-
       {sensorsState.data && (
         <Form.Item>
           <Target

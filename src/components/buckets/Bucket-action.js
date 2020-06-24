@@ -33,11 +33,21 @@ export const getBucket = (dispatch, { limit, page, bucketId }) => {
     });
 };
 
-export const createBucket = ({ name, type }) => {
+export const createBucket = ({
+  name,
+  type,
+  volume = {
+    data: {
+      value: 0,
+      entity: "L"
+    }
+  }
+}) => {
   let url = "/bucket";
   return apiRest.post(url, {
     name,
     type,
+    volume
   });
 };
 
@@ -47,21 +57,26 @@ export const addRelationshipInBucket = ({ id, item, type }) => {
     to: {
       id: item._id,
     },
-    type
+    type,
   };
   return apiRest.post(url, sendData);
 };
 
 export const createNewBucket = async (
-  dispatch,
-  { name, type, sensors = [], actors = [] }
+  dispatch,{
+    name,
+    type,
+    sensors = [],
+    actors = [],
+    volume = { data: { value: 0, entity: "L" } },
+  }
 ) => {
   dispatch({
     type: "FETCHING",
   });
 
   try {
-    const bucket = await createBucket({ name, type });
+    const bucket = await createBucket({ name, type, volume });
 
     if (bucket.data.data && bucket.data.data._id) {
       await sensors.forEach((sensor) => {
@@ -69,30 +84,30 @@ export const createNewBucket = async (
           id: bucket.data.data._id,
           item: sensor,
           type: "Sensor",
-        })
+        });
       });
 
       await actors.forEach((actor) => {
         addRelationshipInBucket({
           id: bucket.data.data._id,
           item: actor,
-          type: "Actor"
-        })
+          type: "Actor",
+        });
       });
     }
 
-    const newBucket = {...bucket.data.data, Sensors: sensors, Actors: actors}
+    const newBucket = { ...bucket.data.data, Sensors: sensors, Actors: actors };
 
     dispatch({
       type: "CREATED",
-      payload:newBucket
-    })
-    return newBucket
-  } catch(error) {
+      payload: newBucket,
+    });
+    return true;
+  } catch (error) {
     dispatch({
       type: "ERRO",
       error,
     });
-    return error
+    return false;
   }
 };
