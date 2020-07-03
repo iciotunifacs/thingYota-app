@@ -6,8 +6,8 @@ import Sensor from '../components/boxes/Sensor';
 const  WaterBoxContainer = (props) => {
   return (
     <div style={containerStyle}>
-      <WaterBox volume={10} title="Caixa 1"/>
-      <WaterBox volume={100} title="Caixa 2"/>
+      <WaterBox volume={100} title="Caixa 1"/>
+      <WaterBox volume={50} title="Caixa 2" size='large'/>
       <Pipe/>
       <Sensor status={true}/>
       <Sensor status={false}/>

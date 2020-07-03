@@ -33,6 +33,15 @@ export const reducer = (state , action) => {
       result: true
     }
   }
+  case "CREATE": {
+    return {
+      ...state,
+      laoding: false,
+      called: true,
+      data : action.payload,
+      result: true
+    }
+  }
   case "ERRO": {
     return {
       ...state,
@@ -40,16 +49,6 @@ export const reducer = (state , action) => {
       called: true,
       error: action.error,
       result: false
-    }
-  }
-  case "CREATED": {
-    return {
-      ...state,
-      laoding: false,
-      called: true,
-      error: null,
-      result: true,
-      data: action.payload
     }
   }
   default:

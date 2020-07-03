@@ -10,7 +10,12 @@ export default function WaterBox({size, volume}) {
       style={{ width: proportions.tamCaixa, height: proportions.tamCaixa }}
       className="WaterBoxContainer"
     >
-      <div id="water-lvl" style={{ height: (volume/100)*proportions.tamAgua }}></div>
+      <div
+        style={{ top: (volume) + "px" }}
+        className="topHeight"
+      >
+        <div id="water-lvl" style={{ height: proportions.tamAgua }}></div>
+      </div>
     </div>
   );
 }

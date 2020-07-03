@@ -6,7 +6,6 @@
 }
 #water-lvl {
   width: 100%;
-  height: 300px;
   background: var(--water-color);
   transition: 2s height;
   position: relative;
@@ -42,4 +41,18 @@
   100% {
     background-position-x: 1000px;
   }
+}
+.WaterBoxContainer{
+background: transparent;
+padding: 5px;
+border-bottom-left-radius: 0.8em;
+border-bottom-right-radius: 0.8em;
+border-top-left-radius: 0.2em;
+border-top-right-radius: 0.2em;
+border-left: 4px solid var(--water-color);
+border-bottom: 4px solid var(--water-color);
+border-right: 4px solid var(--water-color);
+overflow: hidden;
+width: 400px;
+box-shadow: inset -4px -4px #fff, inset 4px -4px #fff;
 }

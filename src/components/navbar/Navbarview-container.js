@@ -39,11 +39,16 @@ const NavbarView = (props) => {
           <span>Reservatórios</span>
         </Menu.Item>
         <Menu.Item key="3" >
+          <Link to='/devices'/>
+          <ExperimentFilled />
+          <span>Dispositivos</span>
+        </Menu.Item>
+        <Menu.Item key="4" >
           <Link to='/report'/>
           <MailOutlined />
           <span>Reportar erro</span>
         </Menu.Item>
-        <Menu.Item key="4" onClick={() => singout(dispatch,{ history, setUser})}>
+        <Menu.Item key="5" onClick={() => singout(dispatch,{ history, setUser})}>
           <CloseCircleFilled />
           <span>Sair</span>
         </Menu.Item>

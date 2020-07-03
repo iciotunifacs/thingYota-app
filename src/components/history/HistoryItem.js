@@ -26,7 +26,7 @@ const HistoryItem = ({ history }) => {
         <Descriptions.Item label="De">{history.From.name}</Descriptions.Item>
         <Descriptions.Item label="Para">{`${history.To.name}`}</Descriptions.Item>
         <Descriptions.Item label="Tipo">{`${history.data.type}`}</Descriptions.Item>
-        {history.data.value.value.data && (
+        {history.data.value && history.data.value.value && history.data.value.value.data && (
           <Descriptions.Item label="Valor">{`${history.data.value.value.data}`}</Descriptions.Item>
         )}
       </Descriptions>
