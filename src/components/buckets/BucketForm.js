@@ -154,8 +154,9 @@ const BucketForm = (props) => {
           onChange={(e) => setVolume(parseFloat(e))}
         />
       </Form.Item>
+
       {sensorsState.data && (
-        <Form.Item>
+        <Form.Item label='Sensores'>
           <Target
             data={mockSensorsForTarget(sensorsState.data)}
             target={selectSensor}
@@ -164,7 +165,7 @@ const BucketForm = (props) => {
         </Form.Item>
       )}
       {actorsState.data && (
-        <Form.Item>
+        <Form.Item label="Atuadores">
           <Target
             data={mockActorsForTarget(actorsState.data)}
             target={selectActor}
