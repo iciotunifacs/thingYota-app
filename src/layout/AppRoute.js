@@ -20,7 +20,8 @@ import DeviceCreate from '../screens/Device-create';
 import ActuatorScreen from '../screens/ActuatorScreen';
 import SensorScreen from '../screens/SensorScreen';
 
-const AppRoute = () => {
+const AppRoute = (props) => {
+  console.log(props)
   return (
     // <Router>
       <Switch>

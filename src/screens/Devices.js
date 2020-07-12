@@ -2,9 +2,9 @@ import React from 'react'
 
 import DeviceView from '../components/device/DeviceView-container';
 
-function Devices() {
+function Devices(props) {
   return (
-    <DeviceView/>
+    <DeviceView {...props}/>
   )
 }
 

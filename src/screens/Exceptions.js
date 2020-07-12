@@ -6,7 +6,8 @@ import {
   CloseOutlined
 } from '@ant-design/icons'
 
-const ExceptionsView =({type, text}) => {
+const ExceptionsView =(props) => {
+  const {type, text} = props;
   switch (type) {
     case 'not_have':
       return (<Result  icon={<CloseOutlined />} title={text  || "Lista vazia"}/>)

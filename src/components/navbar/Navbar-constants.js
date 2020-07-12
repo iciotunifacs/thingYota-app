@@ -3,14 +3,16 @@ import {
   PieChartOutlined,
   ExperimentFilled,
   CloseCircleFilled,
+  ControlOutlined,
   MailOutlined,
+  HomeOutlined
 } from "@ant-design/icons";
 
 export const NavList = [
-  {Link: '/', title: "Início", icon: () => <PieChartOutlined/> },
-  {link: '/statistics' ,title: "Estatísticas", icon: () => <PieChartOutlined/>},
-  {link: '/buckets', title: "Reservatórios", icon: () => <ExperimentFilled/>},
-  {link: '/devices', title: "Dispositivos", icon: () =><ExperimentFilled/>},
-  {link: '/report', title: "Reportar erro", icon: () =><MailOutlined/> },
-  {link: '/logout', title: "Sair", icon: () => <CloseCircleFilled/> },
+  {key: "0",Link: '/', title: "Início", icon: () => <HomeOutlined /> },
+  {key: "1",link: '/statistics' ,title: "Estatísticas", icon: () => <PieChartOutlined/>},
+  {key: "2",link: '/buckets', title: "Reservatórios", icon: () => <ExperimentFilled/>},
+  {key: "3",link: '/devices', title: "Dispositivos", icon: () =><ControlOutlined/>},
+  {key: "4",link: '/report', title: "Reportar erro", icon: () =><MailOutlined/> },
+  {key: "5",link: '/logout', title: "Sair", icon: () => <CloseCircleFilled/> },
 ]

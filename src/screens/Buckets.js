@@ -2,9 +2,9 @@ import React from 'react'
 
 import BucketsView from '../components/buckets/BucketView-container'
 
-function Buckets() {
+function Buckets(props) {
   return (
-    <BucketsView/>
+    <BucketsView {...props}/>
   )
 }
 
