@@ -28,7 +28,6 @@ const NavbarView = (props) => {
     } else {
       item = NavList.find((item) => item.link.includes(location.pathname.split("/")[1]))
     }
-    console.log(item)
     setPage({...item})
   }, [location])
 

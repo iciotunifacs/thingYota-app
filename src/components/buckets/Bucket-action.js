@@ -1,6 +1,6 @@
 import { apiRest } from "../../utils/request";
 
-export const getBucket = (dispatch, { limit, page=0, bucketId }) => {
+export const getBucket = (dispatch, { limit, page=0, bucketId, populate=null }) => {
   dispatch({
     type: "FETCHING",
   });
@@ -16,6 +16,7 @@ export const getBucket = (dispatch, { limit, page=0, bucketId }) => {
       params: {
         limit,
         offset:page,
+        populate
       },
     })
     .then((data) => {
