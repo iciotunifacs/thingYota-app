@@ -24,7 +24,7 @@ const HistoryItem = ({ history }) => {
     });
 
   return (
-    <Card title={history.name} extra={<HistoryExtra id={history._id} />}>
+    <Card title={history.name}>
       <Descriptions size="large">
         <Descriptions.Item label="De">{history.From.name || `${history.From.first_name} ${history.From.last_name}`}</Descriptions.Item>
         <Descriptions.Item label="Para">{`${history.To.name}`}</Descriptions.Item>
