@@ -21,25 +21,23 @@ const MainScreen = (props) => {
   const updateRender = useCallback((item) => setRender(item.key), [render]);
 
   return (
-    <Router>
-      <Layout>
-        {loggedIn && (
-          <Header
-            breakpoint="lg"
-            collapsedWidth="0"
-            style={{ position: "fixed", zIndex: 1, width: "100%" }}
-          >
-            <NavUserView />
-            <Navbar updateRender={updateRender} />
-          </Header>
-        )}
-        <Layout hasSider style={{ minHeight: "100vh" }}>
-          <Content style={{ padding: 100, height: "100vh" }}>
-            <AppRoute />
-          </Content>
-        </Layout>
+    <Layout>
+      {loggedIn && (
+        <Header
+          breakpoint="lg"
+          collapsedWidth="0"
+          style={{ position: "fixed", zIndex: 1, width: "100%" }}
+        >
+          <NavUserView />
+          <Navbar updateRender={updateRender} {...props} />
+        </Header>
+      )}
+      <Layout hasSider style={{ minHeight: "100vh" }}>
+        <Content style={{ padding: 100, height: "100vh" }}>
+          <AppRoute {...props} />
+        </Content>
       </Layout>
-    </Router>
+    </Layout>
   );
 };
 

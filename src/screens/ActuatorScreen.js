@@ -7,7 +7,7 @@ const { Title } = Typography;
 
 const  ActuatorScreen = (props) => {
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} {...props}>
         <Title level={2} style={titleStyle}>Add an actuator (description??)</Title>
         <Actuator />
     </div>

@@ -1,59 +1,53 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-import { Menu } from 'antd';
-import {
-  PieChartOutlined,
-  ExperimentFilled,
-  CloseCircleFilled,
-  MailOutlined,
-} from '@ant-design/icons';
+import { Menu } from "antd";
 
-import {Link} from 'react-router-dom'
+import { Link, useLocation } from "react-router-dom";
 
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { useHistory } from '../../utils/routing';
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-import {useAuth} from '../auth/Auth-context'
-import {singout} from '../auth/Auth-action'
+import { useHistory } from "../../utils/routing";
 
-// const { SubMenu } = Menu;
+import { useAuth } from "../auth/Auth-context";
+
+import { NavList } from "./Navbar-constants";
 
 const NavbarView = (props) => {
-
-
-  const [, setUser] = useLocalStorage('user');
+  const [, setUser] = useLocalStorage("user");
   const history = useHistory();
   const [, dispatch] = useAuth();
+  const [page, setPage] = useLocalStorage("page");
+
+  const location = useLocation();
+
+
+  useEffect(() => {
+    let item;
+    if (location && location.pathname && location.pathname === "/") {
+      item =NavList[0];
+    } else {
+      item = NavList.find((item) => item.link.includes(location.pathname.split("/")[1]))
+    }
+    setPage({...item})
+  }, [location])
 
   return (
-      <Menu mode="horizontal" theme="dark" >
-          <Menu.Item key="1">
-            <Link to='/statistics'/>
-            <PieChartOutlined />
-            <span>Estatísticas</span>
+    <Menu
+      mode="horizontal"
+      theme="dark"
+      selectedKeys={page && page.key ? [page.key] : []}
+    >
+      {NavList.map((item, key) => {
+        return (
+          <Menu.Item key={key}>
+            <Link to={item.link || "/"} />
+            <item.icon />
+            <span>{item.title}</span>
           </Menu.Item>
-        {/* </Link> */}
-        <Menu.Item key="2" >
-          <Link to='/buckets'/>
-          <ExperimentFilled />
-          <span>Reservatórios</span>
-        </Menu.Item>
-        <Menu.Item key="3" >
-          <Link to='/devices'/>
-          <ExperimentFilled />
-          <span>Dispositivos</span>
-        </Menu.Item>
-        <Menu.Item key="4" >
-          <Link to='/report'/>
-          <MailOutlined />
-          <span>Reportar erro</span>
-        </Menu.Item>
-        <Menu.Item key="5" onClick={() => singout(dispatch,{ history, setUser})}>
-          <CloseCircleFilled />
-          <span>Sair</span>
-        </Menu.Item>
-      </Menu>
+        );
+      })}
+    </Menu>
   );
-}
+};
 
-export default NavbarView
+export default NavbarView;

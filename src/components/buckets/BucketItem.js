@@ -24,7 +24,7 @@ const BucketItem = ({ bucket }) => {
     <Card title={bucket.name} extra={<BucketExtra id={bucket._id} />}>
       <Descriptions size="large">
         <Descriptions.Item label="Nome">{bucket.name}</Descriptions.Item>
-        <Descriptions.Item label="Volume">{`${bucket.volume.data.value} ${bucket.volume.data.unity}`}</Descriptions.Item>
+        <Descriptions.Item label="Volume">{`${bucket.volume.data.value} ${bucket.volume.data.entity || "L"}`}</Descriptions.Item>
       </Descriptions>
       <Meta
         description={`Ùltima atualização ${dataString(bucket.last_change)}`}

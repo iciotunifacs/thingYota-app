@@ -1,6 +1,6 @@
 import { apiRest } from "../../utils/request";
 
-export const getDevice = (dispatch, { limit, page, deviceId }) => {
+export const getDevice = (dispatch, { limit, page, deviceId, populate=null }) => {
   dispatch({
     type: "FETCHING",
   });
@@ -15,7 +15,8 @@ export const getDevice = (dispatch, { limit, page, deviceId }) => {
     .get(url, {
       params: {
         limit,
-        page,
+        offset:page,
+        populate
       },
     })
     .then((data) => {

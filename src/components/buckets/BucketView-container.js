@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from "react";
 
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import { Link } from "../../utils/routing";
 
-import {
-  PageView
-} from '../../Base-style'
+import { PageView } from "../../Base-style";
 
-
-import BucketList from './BucketList';
+const BucketList = lazy(() => import("./BucketList"))
 
 function BucketView() {
   return (
@@ -16,8 +13,10 @@ function BucketView() {
       <Link to="/buckets/create">
         <Button> Criar dispositivo</Button>
       </Link>
-      <BucketList/>
+      <Suspense fallback={<Spin tip="Carregando"/>}>
+        <BucketList />
+      </Suspense>
     </PageView>
   );
 }
-export default BucketView
+export default BucketView;

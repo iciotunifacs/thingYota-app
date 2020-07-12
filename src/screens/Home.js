@@ -2,9 +2,9 @@ import React from 'react'
 
 import HomeView from '../components/statistic/StatisticView-container'
 
-const  Home = () => {
+const  Home = (props) => {
   return (
-    <HomeView/>
+    <HomeView {...props}/>
   )
 }
 

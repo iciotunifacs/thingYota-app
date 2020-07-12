@@ -44,6 +44,7 @@ const SingleBucketView = ({ bucketId }) => {
   useEffect(() => {
     getBucket(bucketDispatch, {
       bucketId,
+      populate: true
     });
   }, [bucketId]);
 

@@ -3,7 +3,11 @@ export const initialState = {
   called: false,
   result: false,
   history: [],
-  metadata: null,
+  metadata: {
+    limit: 0,
+    offset: 0,
+    total: 0
+  },
   error : null
 }
 
@@ -18,7 +22,7 @@ export const reducer = (state , action) => {
       ...state,
       laoding: false,
       called: true,
-      history : [...state.history, ...action.history],
+      history : [...action.history],
       metadata : {...action.metadata},
       result: true
     }
