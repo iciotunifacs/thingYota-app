@@ -9,7 +9,7 @@ import {
   reducer as bucketReducer,
 } from "./Buckets-reducer";
 
-import { Typography, Spin, Row } from "antd";
+import { Typography, Spin, Row, Pagination } from "antd";
 
 import Exceptions from "../../screens/Exceptions";
 
@@ -23,6 +23,13 @@ const BucketList = (props) => {
     initialBucketState
   );
 
+  const { limit = 10 } = props;
+
+  const currentPage =
+    bucketState.metadata.offset <= 1
+      ? 1
+      : bucketState.metadata.offset / bucketState.metadata.limit + 1;
+
   useEffect(() => {
     getBucket(bucketDispatch, {
       limit: 10,
@@ -31,7 +38,7 @@ const BucketList = (props) => {
   }, [props]);
 
   if (bucketState.loading || !bucketState.called) {
-    return <Spin tip="Carregando"/>;
+    return <Spin tip="Carregando" />;
   }
 
   if (bucketState.error && !bucketState.loading && bucketState.called) {
@@ -53,6 +60,21 @@ const BucketList = (props) => {
   return (
     <BucketListContainer>
       <Title level={2}>Reservatórios</Title>
+      <Pagination
+        // simple
+        total={parseInt(bucketState.metadata.total)}
+        defaultPageSize={limit}
+        defaultCurrent={currentPage}
+        current={currentPage}
+        onChange={(page, pageSize) => {
+          console.log(page);
+          getBucket(bucketDispatch, {
+            limit,
+            page: page - 1,
+          });
+        }}
+      />
+
       {bucketState.data.map((bucket) => {
         return (
           <Suspense

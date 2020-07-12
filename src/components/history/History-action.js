@@ -1,6 +1,6 @@
 import {apiRest} from '../../utils/request'
 
-export const getHistory = (dispatch,{limit, page}) => {
+export const getHistory = (dispatch,{limit, page=0}) => {
 
   dispatch({
     type: "FETCHING"

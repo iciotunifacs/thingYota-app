@@ -3,7 +3,11 @@ export const initialState = {
   called: false,
   result: false,
   data: null,
-  metadata: null,
+  metadata: {
+    limit: 0,
+    offset: 0,
+    total: 0
+  },
   error : null
 }
 
