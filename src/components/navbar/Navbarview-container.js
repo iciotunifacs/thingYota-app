@@ -20,10 +20,17 @@ const NavbarView = (props) => {
 
   const location = useLocation();
 
+
   useEffect(() => {
-    const item = NavList.find((item) => location.pathname.includes(item.link))
+    let item;
+    if (location && location.pathname && location.pathname === "/") {
+      item =NavList[0];
+    } else {
+      item = NavList.find((item) => item.link.includes(location.pathname.split("/")[1]))
+    }
+    console.log(item)
     setPage({...item})
-  }, [location, setPage])
+  }, [location])
 
   return (
     <Menu
