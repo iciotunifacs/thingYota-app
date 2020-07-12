@@ -11,7 +11,7 @@ export const getHistory = (dispatch,{limit, page}) => {
   apiRest.get(url, {
     params: {
       limit,
-      page
+      offset:page
     }
   }).then(data => {
     dispatch({
