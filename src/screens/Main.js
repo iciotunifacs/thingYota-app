@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "antd";
 
 import AppRoute from "../layout/AppRoute";
@@ -19,25 +20,24 @@ const MainScreen = (props) => {
 
   const updateRender = useCallback((item) => setRender(item.key), [render]);
 
-  console.log(props)
   return (
-      <Layout>
-        {loggedIn && (
-          <Header
-            breakpoint="lg"
-            collapsedWidth="0"
-            style={{ position: "fixed", zIndex: 1, width: "100%" }}
-          >
-            <NavUserView />
-            <Navbar updateRender={updateRender} {...props}/>
-          </Header>
-        )}
-        <Layout hasSider style={{ minHeight: "100vh" }}>
-          <Content style={{ padding: 100, height: "100vh" }}>
-            <AppRoute {...props} />
-          </Content>
-        </Layout>
+    <Layout>
+      {loggedIn && (
+        <Header
+          breakpoint="lg"
+          collapsedWidth="0"
+          style={{ position: "fixed", zIndex: 1, width: "100%" }}
+        >
+          <NavUserView />
+          <Navbar updateRender={updateRender} {...props} />
+        </Header>
+      )}
+      <Layout hasSider style={{ minHeight: "100vh" }}>
+        <Content style={{ padding: 100, height: "100vh" }}>
+          <AppRoute {...props} />
+        </Content>
       </Layout>
+    </Layout>
   );
 };
 
