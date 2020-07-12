@@ -1,21 +1,21 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, lazy, Suspense } from "react";
 
 import { getDevice } from "./Device-action";
 
 import { DeviceListContainer } from "./Device-style";
-
-import DeviceItem from "./DeviceItem";
 
 import {
   initialState as initialDeviceState,
   reducer as deviceReducer,
 } from "./Device-reducer";
 
-import { Typography } from "antd";
+import { Typography, Spin, Row } from "antd";
 
 import Exceptions from "../../screens/Exceptions";
 
 const { Title } = Typography;
+
+const DeviceItem = lazy(() => import("./DeviceItem"));
 
 const DeviceList = (props) => {
   const [deviceState, deviceDispatch] = useReducer(
@@ -27,11 +27,12 @@ const DeviceList = (props) => {
     getDevice(deviceDispatch, {
       limit: 10,
       page: 0,
+      populate:true
     });
   }, [props]);
 
   if (deviceState.loading || !deviceState.called) {
-    return <div>Carregando</div>;
+    return <Spin tip="Carregando"/>;
   }
 
   if (deviceState.error && !deviceState.loading && deviceState.called) {
@@ -54,7 +55,11 @@ const DeviceList = (props) => {
     <DeviceListContainer>
       <Title level={2}>Dispositivos</Title>
       {deviceState.data.map((device) => {
-        return <DeviceItem device={device} />;
+        return (
+          <Suspense fallback={<Row><Spin/></Row>}>
+            <DeviceItem device={device} />
+          </Suspense>
+        );
       })}
     </DeviceListContainer>
   );

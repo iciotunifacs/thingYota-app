@@ -1,21 +1,23 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 
 import { Link } from "../../utils/routing";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 
 import { PageView } from "../../Base-style";
 
-import DeviceList from './DeviceList'
+const DeviceList = lazy(() => import("./DeviceList"))
 
-function DeviceView() {
+const DeviceView = () => {
   return (
     <PageView>
       <Link to="/devices/create">
         <Button> Criar dispositivo</Button>
       </Link>
-      <DeviceList/>
+      <Suspense fallback={<Spin tip="Carregando"/>}>
+        <DeviceList />
+      </Suspense>
     </PageView>
   );
-}
+};
 
 export default DeviceView;
