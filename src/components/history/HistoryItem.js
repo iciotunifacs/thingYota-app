@@ -26,9 +26,11 @@ const HistoryItem = ({ history }) => {
   return (
     <Card title={history.name} extra={<HistoryExtra id={history._id} />}>
       <Descriptions size="large">
-        <Descriptions.Item label="De">{history.From.name}</Descriptions.Item>
+        <Descriptions.Item label="De">{history.From.name || `${history.From.first_name} ${history.From.last_name}`}</Descriptions.Item>
         <Descriptions.Item label="Para">{`${history.To.name}`}</Descriptions.Item>
-        <Descriptions.Item label="Tipo">{HistoryEvent({event: history.data.event})}</Descriptions.Item>
+        {history.data && history.data.event && (
+          <Descriptions.Item label="Tipo">{HistoryEvent({event: history.data.event})}</Descriptions.Item>
+        )}
         {history.data.value && history.data.value.value && history.data.value.value.data && (
           <Descriptions.Item label="Valor">{`${history.data.value.value.data}`}</Descriptions.Item>
         )}
