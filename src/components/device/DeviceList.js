@@ -9,7 +9,7 @@ import {
   reducer as deviceReducer,
 } from "./Device-reducer";
 
-import { Typography, Spin, Row } from "antd";
+import { Typography, Spin, Row, Pagination } from "antd";
 
 import Exceptions from "../../screens/Exceptions";
 
@@ -22,6 +22,13 @@ const DeviceList = (props) => {
     deviceReducer,
     initialDeviceState
   );
+
+  const { limit = 10 } = props;
+
+  const currentPage =
+    deviceState.metadata.offset <= 1
+      ? 1
+      : deviceState.metadata.offset / deviceState.metadata.limit + 1;
 
   useEffect(() => {
     getDevice(deviceDispatch, {
@@ -54,6 +61,20 @@ const DeviceList = (props) => {
   return (
     <DeviceListContainer>
       <Title level={2}>Dispositivos</Title>
+      <Pagination
+        // simple
+        total={parseInt(deviceState.metadata.total)}
+        defaultPageSize={limit}
+        defaultCurrent={currentPage}
+        current={currentPage}
+        onChange={(page, pageSize) => {
+          console.log(page);
+          getDevice(deviceDispatch, {
+            limit,
+            page: page - 1,
+          });
+        }}
+      />
       {deviceState.data.map((device) => {
         return (
           <Suspense fallback={<Row><Spin/></Row>}>

@@ -15,7 +15,7 @@ export const getDevice = (dispatch, { limit, page, deviceId, populate=null }) =>
     .get(url, {
       params: {
         limit,
-        page,
+        offset:page,
         populate
       },
     })
