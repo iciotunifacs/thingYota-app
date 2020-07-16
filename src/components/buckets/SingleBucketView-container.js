@@ -1,8 +1,8 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, lazy, Suspense } from "react";
 
 import {MiniGrid} from './Bucket-style'
 
-import { Descriptions, Card, Typography, Statistic } from "antd";
+import { Descriptions, Card, Typography, Statistic, Spin } from "antd";
 
 import socketIo from "socket.io-client";
 
@@ -15,12 +15,11 @@ import {
   reducer as bucketReducer,
 } from "./Buckets-reducer";
 
-import SensorView from "../senseors/SensorView-container";
-import Actorview from "../actors/ActorView-container";
 import WaterBox from "../boxes/WaterBox";
-
 import Exceptions from "../../screens/Exceptions";
 
+const SensorView = lazy(() => import("../senseors/SensorView-container"));
+const Actorview = lazy(() => import("../actors/ActorView-container"));
 const { Item } = Descriptions;
 const { Title } = Typography;
 
@@ -90,9 +89,17 @@ const SingleBucketView = ({ bucketId }) => {
         </Descriptions>
       </Card>
 
-      {data.Sensors.length > 0 && <SensorView sensors={data.Sensors} />}
+      {data.Sensors.length > 0 && (
+        <Suspense fallback={<Spin/>}>
+          <SensorView sensors={data.Sensors} />
+        </Suspense>
+      )}
 
-      {data.Actors.length > 0 && <Actorview actors={data.Actors} />}
+      {data.Actors.length > 0 && (
+        <Suspense fallback={<Spin />}>
+          <Actorview actors={data.Actors} />
+        </Suspense>
+      )}
     </>
   );
 };

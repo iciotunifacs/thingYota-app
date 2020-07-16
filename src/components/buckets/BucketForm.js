@@ -96,7 +96,7 @@ const BucketForm = (props) => {
     getActors(actorsDispatch, {
       params: { populate: true },
     });
-  }, []);
+  }, [props]);
 
   if (sensorsState.loading || actorsState.loading)
     return <div>Loading....</div>;
