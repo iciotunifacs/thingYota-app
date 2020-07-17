@@ -6,6 +6,9 @@ import { Descriptions, Card, Typography, Statistic, Spin } from "antd";
 
 import socketIo from "socket.io-client";
 
+import { formatDistance } from "date-fns";
+import { ptBR } from "date-fns/locale";
+
 import { getBucket } from "./Bucket-action";
 
 import { actives, sensorVolume } from "./Bucket-utils";
@@ -65,7 +68,10 @@ const SingleBucketView = ({ bucketId }) => {
       <Card>
         <Descriptions layout="vertical">
           <Item label="Name">{data.name}'</Item>
-          <Item label="Data de criação">{data.created_at}</Item>
+          <Item label="Data de criação">{formatDistance(new Date(data.created_at), Date.now(),{
+            includeSeconds: true,
+            locale: ptBR,
+          })}</Item>
           <Item label={`Volume (${data.volume.data.unity})`}>
             <MiniGrid >
               {data.Sensors.length > 0 && (
