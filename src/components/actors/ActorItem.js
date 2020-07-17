@@ -57,7 +57,7 @@ const ValueSwicth = ({ value }) => {
   }
 };
 
-function SensorItem({ actor }) {
+function ActorItem({ actor }) {
   return (
     <Card
       title={actor.name}
@@ -80,4 +80,4 @@ function SensorItem({ actor }) {
   );
 }
 
-export default SensorItem;
+export default ActorItem;

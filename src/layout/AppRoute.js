@@ -1,44 +1,51 @@
-import React, { useEffect } from "react";
+import React, { Suspense, lazy } from "react";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import PrivateRoute from "./PrivateRoute";
+import { Spin } from "antd";
 
-import Login from "../screens/Login";
-import Singup from "../screens/Singup";
-import Logout from "../screens/Logout";
-import Home from "../screens/Home";
-import Buckets from "../screens/Buckets";
-import BucketCreate from "../screens/Bucket-create";
-import SingleBucket from "../screens/SingleBucket";
-import WaterBoxContainer from "../screens/WaterBoxContainer";
-import Exceptions from "../screens/Exceptions";
-import Profile from "../screens/Profile";
-import Statistics from "../screens/Statistics";
-import Devices from "../screens/Devices";
-import DeviceCreate from "../screens/Device-create";
-import ActuatorScreen from "../screens/ActuatorScreen";
-import SensorScreen from "../screens/SensorScreen";
+const Login = lazy(() => import("../screens/Login"));
+const Singup = lazy(() => import("../screens/Singup"));
+const Logout = lazy(() => import("../screens/Logout"));
+const Home = lazy(() => import("../screens/Home"));
+const Buckets = lazy(() => import("../screens/Buckets"));
+const BucketCreate = lazy(() => import("../screens/Bucket-create"));
+const SingleBucket = lazy(() => import("../screens/SingleBucket"));
+const WaterBoxContainer = lazy(() => import("../screens/WaterBoxContainer"));
+const Exceptions = lazy(() => import("../screens/Exceptions"));
+const Profile = lazy(() => import("../screens/Profile"));
+const Statistics = lazy(() => import("../screens/Statistics"));
+const Devices = lazy(() => import("../screens/Devices"));
+const DeviceCreate = lazy(() => import("../screens/Device-create"));
+const ActuatorScreen = lazy(() => import("../screens/ActuatorScreen"));
+const SensorScreen = lazy(() => import("../screens/SensorScreen"));
 
 const AppRoute = (props) => {
   return (
-    <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/singup" component={Singup} />
-      <Route path="/logout" component={Logout} />
+    <Suspense fallback={<Spin/>}>
+      <Switch>
 
-      <PrivateRoute exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/singup" component={Singup} />
+        <Route path="/logout" component={Logout} />
 
-      <PrivateRoute exact path="/devices" component={Devices} />
-      <PrivateRoute exact path="/devices/create" component={DeviceCreate} />
-      <PrivateRoute exact path="/buckets" component={Buckets} />
-      <PrivateRoute exact path="/buckets/create" component={BucketCreate} />
-      <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket} />
-      <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket} />
-      <PrivateRoute exact path="/profile" component={Profile} />
-      <PrivateRoute exact path="/statistics" component={Statistics} />
-      <Route component={Exceptions} />
-    </Switch>
+        <PrivateRoute exact path="/" component={Home} />
+
+        <PrivateRoute exact path="/profile" component={Profile} />
+        <PrivateRoute exact path="/statistics" component={Statistics} />
+
+        <PrivateRoute exact path="/devices" component={Devices} />
+        <PrivateRoute exact path="/devices/create" component={DeviceCreate} />
+
+        <PrivateRoute exact path="/buckets" component={Buckets} />
+        <PrivateRoute exact path="/buckets/create" component={BucketCreate} />
+        <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket} />
+        <PrivateRoute exact path="/bucket/:bucketId" component={SingleBucket} />
+
+        <Route component={Exceptions} />
+      </Switch>
+    </Suspense>
   );
 };
 
