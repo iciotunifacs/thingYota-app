@@ -1,8 +1,6 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 import { Form, Input, Button, Layout, Row, Col, Typography } from "antd";
-
-import md5 from "md5";
 
 import { useAuth } from "../auth/Auth-context";
 
@@ -19,7 +17,7 @@ const ProfileForm = (props) => {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const [{ user: userAuth, error }, dispatch] = useAuth();
+  const [{ user: userAuth, error }] = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPasword] = useState("");
@@ -38,10 +36,10 @@ const ProfileForm = (props) => {
   };
 
   const hasChanges =
-    username == _username &&
-    firstname == _firstname &&
-    lastname == _lastname &&
-    email == _email;
+    username === _username &&
+    firstname === _firstname &&
+    lastname === _lastname &&
+    email === _email;
 
   useEffect(() => {
     if (userAuth) {

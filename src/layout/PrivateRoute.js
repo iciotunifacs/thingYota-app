@@ -1,6 +1,6 @@
 
 import React, {useEffect} from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { useAuth } from "../components/auth/Auth-context";
 import useLocalStorage from "../hooks/useLocalStorage";
 

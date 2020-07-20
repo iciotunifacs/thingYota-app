@@ -5,14 +5,9 @@ import { Card, Descriptions } from "antd";
 import { formatDistance } from "date-fns";
 
 import { ptBR } from "date-fns/locale";
-import { Link } from "react-router-dom";
 
 import {toCaptalize} from '../../utils/string'
 const { Meta } = Card;
-
-const HistoryExtra = ({ value, id }) => {
-  return <div>{id && <Link to={`/history/${id}`}>[Detalhes]</Link>}</div>;
-};
 
 const HistoryEvent = ({event, spliter = "_"}) => `${toCaptalize(event.split(spliter)[1].toString())} ${toCaptalize(event.split(spliter)[0].toString())}`
 

@@ -5,13 +5,8 @@ import { Card, Descriptions } from "antd";
 import { formatDistance } from "date-fns";
 
 import { ptBR } from "date-fns/locale";
-import { Link } from "react-router-dom";
 
 const { Meta } = Card;
-
-const DeviceExtra = ({ value, id }) => {
-  return <div>{id && <Link to={`/device/${id}`}>[Detalhes]</Link>}</div>;
-};
 
 const DeviceItem = ({ device }) => {
   const dataString = (value) =>

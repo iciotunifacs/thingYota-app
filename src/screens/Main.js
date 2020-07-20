@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "antd";
 
 import AppRoute from "../layout/AppRoute";
@@ -9,8 +8,6 @@ import Navbar from "../components/navbar/Navbarview-container";
 import { useAuth } from "../components/auth/Auth-context";
 
 import NavUserView from "../components/navbar/NavbarUserView-container";
-
-import useLocalstorage from "../hooks/useLocalStorage";
 
 const { Content, Header } = Layout;
 
