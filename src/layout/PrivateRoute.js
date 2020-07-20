@@ -9,7 +9,7 @@ import {useHistory} from '../utils/routing'
 import authConstants from '../components/auth/Auth-constant'
 
 function PrivateRoute(props) {
-  const { component: Component, ...rest } = props
+  const { component: Component } = props
   const history = useHistory();
   const [{loggedIn}, dispatch] = useAuth();
   const [user] = useLocalStorage("user");
@@ -29,6 +29,7 @@ function PrivateRoute(props) {
       });
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
 

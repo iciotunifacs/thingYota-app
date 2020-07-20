@@ -2,21 +2,17 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { Avatar, Row, Col } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Avatar } from "antd";
 
 import {
   StyledUserCardMenu,
-  UserTextName,
-  UserCardItens,
   AvatarStyle
 } from "./Navbar-style";
 
 import { useAuth } from "../auth/Auth-context";
 
-import { toCaptalize } from "../../utils/string";
 
-const NavbarUserView = (props) => {
+const NavbarUserView = () => {
   const [{ user, loggedIn }] = useAuth();
   const { first_name, last_name } = user;
 

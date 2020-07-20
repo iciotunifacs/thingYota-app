@@ -8,7 +8,7 @@ const { Text } = Typography;
 
 const { Content } = Layout;
 
-const ProfileForm = (props) => {
+const ProfileForm = () => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -20,7 +20,6 @@ const ProfileForm = (props) => {
   const [{ user: userAuth, error }] = useAuth();
 
   const [username, setUsername] = useState("");
-  const [password, setPasword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +28,6 @@ const ProfileForm = (props) => {
   const _lastname = useMemo(() => userAuth.last_name || "", [userAuth]);
   const _username = useMemo(() => userAuth.username || "", [userAuth]);
   const _email = useMemo(() => userAuth.email || "", [userAuth]);
-  const _password = useMemo(() => userAuth.password || "", [userAuth]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

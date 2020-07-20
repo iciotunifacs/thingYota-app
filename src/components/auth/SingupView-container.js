@@ -60,6 +60,7 @@ const SinginView = (props) => {
         location
       })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   function handleSubmit(event) {
@@ -119,7 +120,7 @@ const SinginView = (props) => {
               <Form.Item {...tailLayout}>
                 <Tooltip title="Useful information">
                   <Link to="/login">
-                    <a >Have account? Sing in</a>
+                    <p >Have account? Sing in</p>
                   </Link>
                 </Tooltip>
               </Form.Item>

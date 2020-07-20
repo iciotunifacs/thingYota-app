@@ -32,6 +32,7 @@ const HistoryList = (props) => {
       limit,
       page: 0,
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   if (historyState.loading) {

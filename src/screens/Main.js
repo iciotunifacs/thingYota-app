@@ -15,6 +15,7 @@ const MainScreen = (props) => {
   const [render, setRender] = useState(1);
   const [{ loggedIn }] = useAuth();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateRender = useCallback((item) => setRender(item.key), [render]);
 
   return (
