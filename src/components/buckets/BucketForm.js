@@ -6,6 +6,7 @@ import {
   Select,
   InputNumber,
   Divider,
+  message
 } from "antd";
 
 import { PlusOutlined } from "@ant-design/icons";
@@ -45,7 +46,7 @@ const BucketForm = (props) => {
     intialActorsState
   );
 
-  const [bucketState, bucketDispatch] = useReducer(
+  const [, bucketDispatch] = useReducer(
     bucketReducer,
     intialBucketState
   );
@@ -63,7 +64,6 @@ const BucketForm = (props) => {
   const [type, setType] = useState("whater-sensor");
   const [volume, setVolume] = useState(1);
   // const [state, setState] = useState(true);
-  const [complete, setComplete] = useState(false)
 
   const handleCreate = (e) => {
     createNewBucket(bucketDispatch, {
@@ -79,7 +79,10 @@ const BucketForm = (props) => {
         selectActor.includes(item._id)
       ),
     }).then(data => {
-      setComplete(data)
+      message.success('Reservatório criado com sucesso');
+    })
+    .catch(error => {
+      message.error("Erro ao criar reservatório")
     })
   }
 
@@ -127,7 +130,7 @@ const BucketForm = (props) => {
                   value={otherTypeItem}
                   onChange={(e) => setOtherTypeItem(e.target.value)}
                 />
-                <a
+                <p
                   style={{
                     flex: "none",
                     padding: "8px",
@@ -137,7 +140,7 @@ const BucketForm = (props) => {
                   onClick={addTypeItem}
                 >
                   <PlusOutlined /> Add item
-                </a>
+                </p>
               </div>
             </div>
           )}

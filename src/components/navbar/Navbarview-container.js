@@ -6,20 +6,12 @@ import { Link, useLocation } from "react-router-dom";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-import { useHistory } from "../../utils/routing";
-
-import { useAuth } from "../auth/Auth-context";
-
 import { NavList } from "./Navbar-constants";
 
 const NavbarView = (props) => {
-  const [, setUser] = useLocalStorage("user");
-  const history = useHistory();
-  const [, dispatch] = useAuth();
   const [page, setPage] = useLocalStorage("page");
 
   const location = useLocation();
-
 
   useEffect(() => {
     let item;
@@ -29,6 +21,7 @@ const NavbarView = (props) => {
       item = NavList.find((item) => item.link.includes(location.pathname.split("/")[1]))
     }
     setPage({...item})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
   return (

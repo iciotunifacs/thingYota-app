@@ -13,14 +13,7 @@ const lastData = (value) =>
   });
 
 const ValueSwicth = ({ value }) => {
-  switch (typeof value.data) {
-    case "boolean":
-    default:
-      return (
-        <Typography.Title level={4}>
-          {value.data ? "Ativado" : "Desativado"}
-        </Typography.Title>
-      );
+  switch (value.entity) {
     case "number":
       return (
           <Statistic
@@ -28,6 +21,13 @@ const ValueSwicth = ({ value }) => {
             precision={2}
             suffix={` ${value.unity}`}
           />
+      );
+    case "boolean":
+    default:
+      return (
+        <Typography.Title level={4}>
+          {value.data ? "Ativado" : "Desativado"}
+        </Typography.Title>
       );
   }
 };

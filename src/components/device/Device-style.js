@@ -18,7 +18,6 @@ export const ContainerdevicecreateForm = Styled.div`
 export const DeviceListContainer = Styled.div`
   width: 80%;
   padding: 10px;
-  background-color: #FAFAFA;
 `;
 
 export const TitleForm = Styled.div`

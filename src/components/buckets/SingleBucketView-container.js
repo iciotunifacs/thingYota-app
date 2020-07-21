@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, lazy, Suspense } from "react";
 
 import {MiniGrid} from './Bucket-style'
 
-import { Descriptions, Card, Typography, Statistic, Spin } from "antd";
+import { Descriptions, Card, Typography, Statistic, Spin, Progress } from "antd";
 
 import socketIo from "socket.io-client";
 
@@ -18,7 +18,6 @@ import {
   reducer as bucketReducer,
 } from "./Buckets-reducer";
 
-import WaterBox from "../boxes/WaterBox";
 import Exceptions from "../../screens/Exceptions";
 
 const SensorView = lazy(() => import("../senseors/SensorView-container"));
@@ -41,6 +40,7 @@ const SingleBucketView = ({ bucketId }) => {
           payload: payload.data.Bucket,
         });
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -72,22 +72,18 @@ const SingleBucketView = ({ bucketId }) => {
             includeSeconds: true,
             locale: ptBR,
           })}</Item>
-          <Item label={`Volume (${data.volume.data.unity})`}>
+          <Item label={`Volume (${data.volume.data.entity})`}>
             <MiniGrid >
               {data.Sensors.length > 0 && (
-                <WaterBox
-                  title={data.name}
-                  size="small"
-                  volume={Math.round(
-                    (actives(data.Sensors) / sensorVolume(data.Sensors)) * 100
-                  )}
+                <Progress
+                  type='circle'
+                  percent={Math.round((actives(data.Sensors) / sensorVolume(data.Sensors)) * 100)}
+                  width={60}
                 />
               )}
               <Statistic
                 precision={1}
-                value={Math.round(
-                  actives(data.Sensors) / sensorVolume(data.Sensors)
-                )}
+                value={Math.round(actives(data.Sensors) / sensorVolume(data.Sensors) * data.volume.data.value)}
                 suffix={`/${data.volume.data.value}`}
               />
             </MiniGrid>

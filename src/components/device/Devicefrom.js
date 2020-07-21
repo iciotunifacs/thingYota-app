@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { Form, Input, Button, Layout, notification} from "antd";
+import { Form, Input, Button, notification, message} from "antd";
 
 import {
   initialState as initialDeviceState,
@@ -7,8 +7,6 @@ import {
 } from "./Device-reducer";
 
 import { createDevice } from "./Device-action";
-
-const { Content } = Layout;
 
 const layout = {
   labelCol: { span: 8 },
@@ -30,7 +28,7 @@ const Device = (props) => {
   const [name, setName] = useState("");
   const [showAlert, setShowAlet] = useState(false);
 
-  const [{ called, laoding, result, error }, deviceDispatch] = useReducer(
+  const [{ called, result }, deviceDispatch] = useReducer(
     deviceReducer,
     initialDeviceState
   );
@@ -59,8 +57,11 @@ const Device = (props) => {
               createDevice(deviceDispatch, {
                 mac_addres: macAddtes,
                 name,
-              });
-              setShowAlet(true)
+              }).then(data => {
+                message.success(`Dispositivo criado com sucesso`);
+              }).catch(error => {
+                message.error("Erro ao cadastrar dispositivi")
+              })
             }}
           >
             Submit

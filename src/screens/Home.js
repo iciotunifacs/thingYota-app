@@ -1,11 +1,6 @@
 import React from 'react'
+import Homeview from '../components/home/HomeView-container'
 
-import HomeView from '../components/statistic/StatisticView-container'
-
-const  Home = (props) => {
-  return (
-    <HomeView {...props}/>
-  )
-}
+const Home = props => <Homeview {...props}/>
 
 export default Home

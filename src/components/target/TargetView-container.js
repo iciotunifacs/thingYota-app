@@ -13,7 +13,7 @@ const TargetView = (props) => {
   });
 
   const handleChange = (nextTargetKeys, direction, moveKeys) => {
-    if (direction == "right") {
+    if (direction === "right") {
       setTarget([...target, ...nextTargetKeys])
     } else {
       setTarget([...target.filter(item => moveKeys.indexOf(item))])

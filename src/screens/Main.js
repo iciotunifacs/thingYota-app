@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "antd";
 
 import AppRoute from "../layout/AppRoute";
@@ -10,14 +9,13 @@ import { useAuth } from "../components/auth/Auth-context";
 
 import NavUserView from "../components/navbar/NavbarUserView-container";
 
-import useLocalstorage from "../hooks/useLocalStorage";
-
 const { Content, Header } = Layout;
 
 const MainScreen = (props) => {
   const [render, setRender] = useState(1);
   const [{ loggedIn }] = useAuth();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateRender = useCallback((item) => setRender(item.key), [render]);
 
   return (

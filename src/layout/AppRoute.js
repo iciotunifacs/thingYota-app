@@ -12,14 +12,11 @@ const Home = lazy(() => import("../screens/Home"));
 const Buckets = lazy(() => import("../screens/Buckets"));
 const BucketCreate = lazy(() => import("../screens/Bucket-create"));
 const SingleBucket = lazy(() => import("../screens/SingleBucket"));
-const WaterBoxContainer = lazy(() => import("../screens/WaterBoxContainer"));
 const Exceptions = lazy(() => import("../screens/Exceptions"));
 const Profile = lazy(() => import("../screens/Profile"));
 const Statistics = lazy(() => import("../screens/Statistics"));
 const Devices = lazy(() => import("../screens/Devices"));
 const DeviceCreate = lazy(() => import("../screens/Device-create"));
-const ActuatorScreen = lazy(() => import("../screens/ActuatorScreen"));
-const SensorScreen = lazy(() => import("../screens/SensorScreen"));
 
 const AppRoute = (props) => {
   return (

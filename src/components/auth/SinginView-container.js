@@ -57,6 +57,7 @@ const SinginView = (props) => {
         location
       })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
 
@@ -98,7 +99,7 @@ const SinginView = (props) => {
               <Form.Item {...tailLayout}>
                 <Tooltip title="Useful information">
                   <Link to="/singup">
-                    <a>Not have account? Sing up</a>
+                    <p>Not have account? Sing up</p>
                   </Link>
                 </Tooltip>
               </Form.Item>

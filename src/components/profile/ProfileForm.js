@@ -1,8 +1,6 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 import { Form, Input, Button, Layout, Row, Col, Typography } from "antd";
-
-import md5 from "md5";
 
 import { useAuth } from "../auth/Auth-context";
 
@@ -10,7 +8,7 @@ const { Text } = Typography;
 
 const { Content } = Layout;
 
-const ProfileForm = (props) => {
+const ProfileForm = () => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -19,10 +17,9 @@ const ProfileForm = (props) => {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const [{ user: userAuth, error }, dispatch] = useAuth();
+  const [{ user: userAuth, error }] = useAuth();
 
   const [username, setUsername] = useState("");
-  const [password, setPasword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -31,17 +28,16 @@ const ProfileForm = (props) => {
   const _lastname = useMemo(() => userAuth.last_name || "", [userAuth]);
   const _username = useMemo(() => userAuth.username || "", [userAuth]);
   const _email = useMemo(() => userAuth.email || "", [userAuth]);
-  const _password = useMemo(() => userAuth.password || "", [userAuth]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
   };
 
   const hasChanges =
-    username == _username &&
-    firstname == _firstname &&
-    lastname == _lastname &&
-    email == _email;
+    username === _username &&
+    firstname === _firstname &&
+    lastname === _lastname &&
+    email === _email;
 
   useEffect(() => {
     if (userAuth) {

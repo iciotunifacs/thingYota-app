@@ -71,6 +71,7 @@ const BucketList = (props) => {
           getBucket(bucketDispatch, {
             limit,
             page: page - 1,
+            populate: true
           });
         }}
       />
