@@ -21,8 +21,6 @@ const HistoryItem = ({ history }) => {
       locale: ptBR,
     });
 
-    console.log(history.To)
-
   return (
     <Card title={history.name}>
       <Descriptions size="large">

@@ -15,7 +15,6 @@ const lastData = (value) =>
   });
 
 const ValueSwicth = ({ value }) => {
-  console.log(value);
   if (value === undefined || value == null)
     return (
       <>
@@ -36,7 +35,7 @@ const ValueSwicth = ({ value }) => {
     default:
       return (
         <>
-          <Title level={4}>{value.data ? "Em uso" : "Patado"}</Title>
+          <Title level={4}>{value.data ? "Em uso" : "Parado"}</Title>
         </>
       );
   }

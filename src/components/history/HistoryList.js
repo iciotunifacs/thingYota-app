@@ -26,7 +26,6 @@ const HistoryList = (props) => {
 
   const currentPage = historyState.metadata.offset <= 1 ? 1 : (historyState.metadata.offset/historyState.metadata.limit)+1
 
-  console.log(currentPage)
   useEffect(() => {
     getHistory(historyDispatch, {
       limit,
