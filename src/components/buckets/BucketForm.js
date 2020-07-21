@@ -6,6 +6,7 @@ import {
   Select,
   InputNumber,
   Divider,
+  message
 } from "antd";
 
 import { PlusOutlined } from "@ant-design/icons";
@@ -63,7 +64,6 @@ const BucketForm = (props) => {
   const [type, setType] = useState("whater-sensor");
   const [volume, setVolume] = useState(1);
   // const [state, setState] = useState(true);
-  const [, setComplete] = useState(false)
 
   const handleCreate = (e) => {
     createNewBucket(bucketDispatch, {
@@ -79,7 +79,10 @@ const BucketForm = (props) => {
         selectActor.includes(item._id)
       ),
     }).then(data => {
-      setComplete(data)
+      message.info('Reservatório criado com sucesso');
+    })
+    .catch(error => {
+      message.info("Erro ao criar reservatório")
     })
   }
 
