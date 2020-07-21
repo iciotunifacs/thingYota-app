@@ -13,7 +13,6 @@ const NavbarView = (props) => {
 
   const location = useLocation();
 
-
   useEffect(() => {
     let item;
     if (location && location.pathname && location.pathname === "/") {
