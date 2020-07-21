@@ -83,9 +83,7 @@ const SingleBucketView = ({ bucketId }) => {
               )}
               <Statistic
                 precision={1}
-                value={Math.round(
-                  actives(data.Sensors) / sensorVolume(data.Sensors)
-                )}
+                value={Math.round(actives(data.Sensors) / sensorVolume(data.Sensors) * data.volume.data.value)}
                 suffix={`/${data.volume.data.value}`}
               />
             </MiniGrid>

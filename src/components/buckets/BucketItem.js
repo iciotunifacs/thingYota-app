@@ -37,7 +37,7 @@ const BucketItem = ({ bucket }) => {
             precision={1}
             value={Math.round(
               actives(bucket.Sensors) / sensorVolume(bucket.Sensors)
-            )}
+            ) * bucket.volume.data.value}
             suffix={`/${bucket.volume.data.value}`}
           />
         </Descriptions.Item>
