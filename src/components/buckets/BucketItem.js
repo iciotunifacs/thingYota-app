@@ -1,9 +1,7 @@
 import React from "react";
 
 import { Card, Descriptions, Statistic } from "antd";
-import {
-   EyeFilled
-} from '@ant-design/icons';
+import { EyeFilled } from "@ant-design/icons";
 
 import { formatDistance } from "date-fns";
 
@@ -15,7 +13,15 @@ import { actives, sensorVolume } from "./Bucket-utils";
 const { Meta } = Card;
 
 const BucketExtra = ({ id }) => {
-  return <div>{id && <Link to={`/bucket/${id}`}><EyeFilled /></Link>}</div>;
+  if (id) {
+    return (
+      <Link to={`/bucket/${id}`}>
+        <span>Visualizar</span>
+        <EyeFilled />
+      </Link>
+    );
+  }
+  return <></>;
 };
 
 const BucketItem = ({ bucket }) => {
@@ -35,9 +41,11 @@ const BucketItem = ({ bucket }) => {
         <Descriptions.Item lable="Volume">
           <Statistic
             precision={1}
-            value={Math.round(
-              actives(bucket.Sensors) / sensorVolume(bucket.Sensors)
-            ) * bucket.volume.data.value}
+            value={
+              Math.round(
+                actives(bucket.Sensors) / sensorVolume(bucket.Sensors)
+              ) * bucket.volume.data.value
+            }
             suffix={`/${bucket.volume.data.value}`}
           />
         </Descriptions.Item>
