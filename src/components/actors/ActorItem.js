@@ -1,11 +1,7 @@
 import React from "react";
 
-import { Card, Tag, Descriptions, Typography, Statistic, Switch } from "antd";
-import {
-  ExclamationOutlined,
-  CheckOutlined,
-  CloseOutlined,
-} from "@ant-design/icons";
+import { Card, Tag, Descriptions, Typography, Statistic } from "antd";
+import { ExclamationOutlined } from "@ant-design/icons";
 
 import { formatDistance } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -19,6 +15,7 @@ const lastData = (value) =>
   });
 
 const ValueSwicth = ({ value }) => {
+  console.log(value);
   if (value === undefined || value == null)
     return (
       <>
@@ -27,25 +24,6 @@ const ValueSwicth = ({ value }) => {
       </>
     );
   switch (typeof value.data) {
-    case "boolean":
-    default:
-      return (
-        <>
-          {value.data ? (
-            <>
-              <CheckOutlined style={{ fontSize: "48px" }} />
-              <Title level={4}>Em uso</Title>
-            </>
-          ) : (
-            <>
-              <CloseOutlined style={{ fontSize: "48px" }} />
-              <Title level={4}>Parado</Title>
-            </>
-          )}
-          {/* TODO: inserir action para desativar / ativar atuadores  */}
-          <Switch checked={value.data}/>
-        </>
-      );
     case "number":
       return (
         <Statistic
@@ -53,6 +31,13 @@ const ValueSwicth = ({ value }) => {
           precision={2}
           suffix={` ${value.unity}`}
         />
+      );
+    case "boolean":
+    default:
+      return (
+        <>
+          <Title level={4}>{value.data ? "Em uso" : "Patado"}</Title>
+        </>
       );
   }
 };
