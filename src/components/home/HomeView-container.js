@@ -1,21 +1,20 @@
 import React from 'react'
 
-import {
-  homeDiv
-} from './Home-style'
+import { useAuth } from "../auth/Auth-context";
 
-import {
-  PageView
-} from '../../Base-style'
+import {HomeViewContainer} from './Home-style'
+import { Result } from 'antd';
 
-const HomeView = (props) => {
+const  HomeView = (props) => {
+  const [{user}] = useAuth();
+
   return (
-    <PageView>
-      <homeDiv>
-        <h1>Teste</h1>
-        Home view
-      </homeDiv>
-    </PageView>
+    <HomeViewContainer>
+       <Result
+        status="success"
+        title={`Bem-vindo a plataforma de IoT ${user.first_name || ''}`}
+      />
+    </HomeViewContainer>
   )
 }
 

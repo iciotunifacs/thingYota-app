@@ -5,3 +5,10 @@ export const homeDiv  = styled.div`
   padding: 24;
   min-height: 360;
 `;
+
+export const HomeViewContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
