@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { Form, Input, Button, notification} from "antd";
+import { Form, Input, Button, notification, message} from "antd";
 
 import {
   initialState as initialDeviceState,
@@ -57,8 +57,11 @@ const Device = (props) => {
               createDevice(deviceDispatch, {
                 mac_addres: macAddtes,
                 name,
-              });
-              setShowAlet(true)
+              }).then(data => {
+                message.success(`Dispositivo criado com sucesso`);
+              }).catch(error => {
+                message.error("Erro ao cadastrar dispositivi")
+              })
             }}
           >
             Submit

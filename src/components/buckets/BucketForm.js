@@ -79,10 +79,10 @@ const BucketForm = (props) => {
         selectActor.includes(item._id)
       ),
     }).then(data => {
-      message.info('Reservatório criado com sucesso');
+      message.success('Reservatório criado com sucesso');
     })
     .catch(error => {
-      message.info("Erro ao criar reservatório")
+      message.error("Erro ao criar reservatório")
     })
   }
 
