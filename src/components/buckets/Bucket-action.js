@@ -1,6 +1,9 @@
 import { apiRest } from "../../utils/request";
 
-export const getBucket = (dispatch, { limit, page=0, bucketId, populate=null }) => {
+export const getBucket = (
+  dispatch,
+  { limit, page = 0, bucketId, populate = null }
+) => {
   dispatch({
     type: "FETCHING",
   });
@@ -15,8 +18,8 @@ export const getBucket = (dispatch, { limit, page=0, bucketId, populate=null }) 
     .get(url, {
       params: {
         limit,
-        offset:page,
-        populate
+        offset: page,
+        populate,
       },
     })
     .then((data) => {
@@ -34,37 +37,9 @@ export const getBucket = (dispatch, { limit, page=0, bucketId, populate=null }) 
     });
 };
 
-export const createBucket = ({
-  name,
-  type,
-  volume = {
-    data: {
-      value: 0,
-      entity: "L"
-    }
-  }
-}) => {
-  let url = "/bucket";
-  return apiRest.post(url, {
-    name,
-    type,
-    volume
-  });
-};
-
-export const addRelationshipInBucket = ({ id, item, type }) => {
-  let url = `/bucket/${id}/relationship`;
-  let sendData = {
-    to: {
-      id: item._id,
-    },
-    type,
-  };
-  return apiRest.post(url, sendData);
-};
-
-export const createNewBucket = async (
-  dispatch,{
+export const createBucket = async (
+  dispatch,
+  {
     name,
     type,
     sensors = [],
@@ -77,31 +52,17 @@ export const createNewBucket = async (
   });
 
   try {
-    const bucket = await createBucket({ name, type, volume });
-
-    if (bucket.data.data && bucket.data.data._id) {
-      await sensors.forEach((sensor) => {
-        addRelationshipInBucket({
-          id: bucket.data.data._id,
-          item: sensor,
-          type: "Sensor",
-        });
-      });
-
-      await actors.forEach((actor) => {
-        addRelationshipInBucket({
-          id: bucket.data.data._id,
-          item: actor,
-          type: "Actor",
-        });
-      });
-    }
-
-    const newBucket = { ...bucket.data.data, Sensors: sensors, Actors: actors };
+    const bucket = await apiRest.post("/bucket", {
+      name,
+      type,
+      volume,
+      Sensors: sensors.map((sensor) => sensor._id),
+      Actors: actors.map((actor) => actor._id),
+    });
 
     dispatch({
       type: "CREATED",
-      payload: newBucket,
+      payload: bucket,
     });
     return true;
   } catch (error) {
