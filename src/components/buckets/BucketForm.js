@@ -34,7 +34,7 @@ import {
   reducer as bucketReducer,
 } from "./Buckets-reducer";
 
-import { createNewBucket } from "./Bucket-action";
+import { createBucket } from "./Bucket-action";
 
 const BucketForm = (props) => {
   const [sensorsState, sensorsDispatch] = useReducer(
@@ -66,7 +66,7 @@ const BucketForm = (props) => {
   // const [state, setState] = useState(true);
 
   const handleCreate = (e) => {
-    createNewBucket(bucketDispatch, {
+    createBucket(bucketDispatch, {
       name,
       type,
       volume: {
