@@ -13,7 +13,7 @@ export const authReducer = (state, action) => {
     case dispatchTypes.REGISTER_REQUEST:
       return { ...state, loading: true };
     case dispatchTypes.REGISTER_SUCCESS:
-      return { ...state, loading: false, loggedIn: true, user: action.user , error: null};
+      return { ...state, loading: false, loggedIn: true, user: {...action.data} , error: null};
     case dispatchTypes.REGISTER_FAILURE:
       return { ...state, loading: false, loggedIn: false, error: action.error };
     case dispatchTypes.LOGIN_REQUEST:

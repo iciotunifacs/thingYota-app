@@ -87,7 +87,6 @@ const BucketForm = (props) => {
   }
 
   let notEnable = !name || name.length < 3 || !type
-  console.log(notEnable)
 
   useEffect(() => {
     // get sensors

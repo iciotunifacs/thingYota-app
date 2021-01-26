@@ -67,7 +67,6 @@ const BucketList = (props) => {
         defaultCurrent={currentPage}
         current={currentPage}
         onChange={(page, pageSize) => {
-          console.log(page);
           getBucket(bucketDispatch, {
             limit,
             page: page - 1,

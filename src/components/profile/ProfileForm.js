@@ -49,8 +49,6 @@ const ProfileForm = () => {
     }
   }, [userAuth]);
 
-  console.log(hasChanges, username, _username)
-  // ||password !== _password;
   return (
     <Layout style={{ backgroundColor: "#FAFAFA" }}>
       {userAuth && (

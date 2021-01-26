@@ -22,16 +22,19 @@ const HistoryList = (props) => {
     historyReducer,
     initialHistoryState
   );
-  const {limit=10} = props
+  const { limit = 10 } = props;
 
-  const currentPage = historyState.metadata.offset <= 1 ? 1 : (historyState.metadata.offset/historyState.metadata.limit)+1
+  const currentPage =
+    historyState.metadata.offset <= 1
+      ? 1
+      : historyState.metadata.offset / historyState.metadata.limit + 1;
 
   useEffect(() => {
     getHistory(historyDispatch, {
       limit,
       page: 0,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   if (historyState.loading) {
@@ -62,10 +65,9 @@ const HistoryList = (props) => {
         defaultCurrent={currentPage}
         current={currentPage}
         onChange={(page, pageSize) => {
-          console.log(page)
           getHistory(historyDispatch, {
             limit,
-            page: page-1,
+            page: page - 1,
           });
         }}
       />

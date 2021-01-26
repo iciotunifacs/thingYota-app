@@ -2,6 +2,7 @@ import Axios from 'axios'
 
 import getUser from './getUser';
 
+
 let user = getUser();
 
 export const apiRest = Axios.create({

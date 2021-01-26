@@ -68,7 +68,6 @@ const DeviceList = (props) => {
         defaultCurrent={currentPage}
         current={currentPage}
         onChange={(page, pageSize) => {
-          console.log(page);
           getDevice(deviceDispatch, {
             limit,
             page: page - 1,
