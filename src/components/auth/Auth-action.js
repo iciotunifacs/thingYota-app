@@ -1,4 +1,4 @@
-import AuthConstant from './Auth-constant';
+import {dispatchTypes} from './Auth-constant';
 import {
   apiAuth,
   apiRest
@@ -6,7 +6,7 @@ import {
 
 export const singin = async (dispatch, filter) => {
   dispatch({
-    type: AuthConstant.LOGIN_REQUEST
+    type: dispatchTypes.LOGIN_REQUEST
   })
   let url = '/login'
   try {
@@ -17,13 +17,13 @@ export const singin = async (dispatch, filter) => {
     // store user in localstorage
     filter.setUser({...request.data.data.user, token: request.data.data.token})
     dispatch({
-      type: AuthConstant.LOGIN_SUCCESS,
+      type: dispatchTypes.LOGIN_SUCCESS,
       data: {...request.data.data.user, token: request.data.data.token}
     })
 
   } catch(error) {
     dispatch({
-      type: AuthConstant.LOGIN_FAILURE,
+      type: dispatchTypes.LOGIN_FAILURE,
       error: error
     })
   }
@@ -33,7 +33,7 @@ export const checkAuth = ({ setUser, user, dispatch, history, redirectTo = null,
   try {
     if (user) {
       dispatch({
-        type: AuthConstant.LOGIN_SUCCESS,
+        type: dispatchTypes.LOGIN_SUCCESS,
         data: {...user}
       })
       setUser(user)
@@ -42,14 +42,14 @@ export const checkAuth = ({ setUser, user, dispatch, history, redirectTo = null,
   } catch (error) {
     console.error({ error });
     dispatch({
-      type: AuthConstant.LOGIN_FAILURE
+      type: dispatchTypes.LOGIN_FAILURE
     })
   }
 };
 
 export const singup = async (dispatch, parans) => {
   dispatch({
-    type: AuthConstant.REGISTER_REQUEST
+    type: dispatchTypes.REGISTER_REQUEST
   })
 
   let url = "/singup/user";
@@ -70,13 +70,13 @@ export const singup = async (dispatch, parans) => {
     });
     parans.setUser(request.data.data)
     dispatch({
-      type: AuthConstant.REGISTER_SUCCESS,
+      type: dispatchTypes.REGISTER_SUCCESS,
       user: request.data.data
     })
   } catch (error) {
     console.log(error)
       dispatch({
-        type: AuthConstant.REGISTER_FAILURE,
+        type: dispatchTypes.REGISTER_FAILURE,
         error: error
       })
   }
@@ -84,7 +84,7 @@ export const singup = async (dispatch, parans) => {
 
 export const singout = (dispatch, {setUser, history}) => {
   dispatch({
-    type: AuthConstant.LOGOUT
+    type: dispatchTypes.LOGOUT
   })
   setUser(null);
   history.push('/login');

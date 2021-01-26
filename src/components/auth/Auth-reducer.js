@@ -1,4 +1,4 @@
-import AuthConstant from './Auth-constant';
+import {dispatchTypes} from './Auth-constant';
 
 export const initialAuthState = {
   loading: false,
@@ -10,19 +10,19 @@ export const initialAuthState = {
 
 export const authReducer = (state, action) => {
   switch (action.type) {
-    case AuthConstant.REGISTER_REQUEST:
+    case dispatchTypes.REGISTER_REQUEST:
       return { ...state, loading: true };
-    case AuthConstant.REGISTER_SUCCESS:
+    case dispatchTypes.REGISTER_SUCCESS:
       return { ...state, loading: false, loggedIn: true, user: action.user , error: null};
-    case AuthConstant.REGISTER_FAILURE:
+    case dispatchTypes.REGISTER_FAILURE:
       return { ...state, loading: false, loggedIn: false, error: action.error };
-    case AuthConstant.LOGIN_REQUEST:
+    case dispatchTypes.LOGIN_REQUEST:
       return { ...state, loading: true };
-    case AuthConstant.LOGIN_SUCCESS:
+    case dispatchTypes.LOGIN_SUCCESS:
       return { ...state, loading: false, loggedIn: true, user: action.data, error: null};
-    case AuthConstant.LOGIN_FAILURE:
+    case dispatchTypes.LOGIN_FAILURE:
       return { ...state, loading: false, loggedIn: false, error: action.error };
-    case AuthConstant.LOGOUT:
+    case dispatchTypes.LOGOUT:
       return { ...initialAuthState };
     default:
       return state;

@@ -6,7 +6,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 import {useHistory} from '../utils/routing'
 
-import authConstants from '../components/auth/Auth-constant'
+import {dispatchTypes} from '../components/auth/Auth-constant'
 
 function PrivateRoute(props) {
   const { component: Component } = props
@@ -24,7 +24,7 @@ function PrivateRoute(props) {
 
     if (user) {
       dispatch({
-        type: authConstants.LOGIN_SUCCESS,
+        type: dispatchTypes.LOGIN_SUCCESS,
         data: user
       });
     }
