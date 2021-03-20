@@ -1,26 +1,31 @@
-import React from 'react';
-import Actuator from '../components/forms/Actuator.js';
-import { Typography } from 'antd';
+import React from "react";
+import Actuator from "../components/forms/Actuator.js";
+import TopbarView from "../components/topbar";
+import { Typography } from "antd";
 
 const { Title } = Typography;
 
-
-const  ActuatorScreen = (props) => {
+const ActuatorScreen = (props) => {
   return (
-    <div style={containerStyle} {...props}>
-        <Title level={2} style={titleStyle}>Add an actuator (description??)</Title>
+    <>
+      <TopbarView />
+      <div style={containerStyle} {...props}>
+        <Title level={2} style={titleStyle}>
+          Add an actuator (description??)
+        </Title>
         <Actuator />
-    </div>
-  )
-}
+      </div>
+    </>
+  );
+};
 
 const containerStyle = {
-  margin: '0px auto',
-  background: 'white none repeat scroll 0% 0%',
-  borderRadius: '4px',
-  padding: '2em'
-}
+  margin: "0px auto",
+  background: "white none repeat scroll 0% 0%",
+  borderRadius: "4px",
+  padding: "2em",
+};
 const titleStyle = {
-  textAlign: 'center'
-}
+  textAlign: "center",
+};
 export default ActuatorScreen;

@@ -1,20 +1,13 @@
-import React , {lazy, Suspense} from 'react';
+import React from "react";
 
-import {
-  PageView
-} from '../../Base-style';
-
-import {Spin} from 'antd'
-
-const HistoryList = lazy(() => import('./HistoryList'));
+import { PageView } from "../../Base-style";
+import HistoryList from "../history/HistoryList";
 
 function HistoryView() {
   return (
     <PageView>
-      <Suspense fallback={<Spin tip="Carregando"/>}>
-        <HistoryList />
-      </Suspense>
+      <HistoryList />
     </PageView>
   );
 }
-export default HistoryView
+export default HistoryView;

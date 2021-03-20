@@ -18,11 +18,10 @@ const Statistics = lazy(() => import("../screens/Statistics"));
 const Devices = lazy(() => import("../screens/Devices"));
 const DeviceCreate = lazy(() => import("../screens/Device-create"));
 
-const AppRoute = (props) => {
+const AppRoute = () => {
   return (
-    <Suspense fallback={<Spin/>}>
+    <Suspense fallback={<Spin />}>
       <Switch>
-
         <Route path="/login" component={Login} />
         <Route path="/singup" component={Singup} />
         <Route path="/logout" component={Logout} />

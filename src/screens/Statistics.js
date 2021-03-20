@@ -1,13 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import History from '../components/history/HistoryView-container'
+import History from "../components/history/HistoryView-container";
+import TopbarView from "../components/topbar/TopbarView-container";
 
 const Statistics = () => {
   return (
     <>
-      <History/>
+      <TopbarView />
+      <History />
     </>
-  )
-}
+  );
+};
 
-export default Statistics
+export default Statistics;

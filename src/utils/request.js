@@ -12,10 +12,15 @@ const apiRest = Axios.create({
   },
 });
 
-apiRest.interceptors.request.use((config) => {
-  const token = getUser()?.token ?? process.env.REACT_APP_TOKEN_GUEST;
-  config.headers.Authorization = `Bearer ${token}`;
-});
+apiRest.interceptors.request.use(
+  (config) => {
+    const token = getUser()?.token ?? process.env.REACT_APP_TOKEN_GUEST;
+    config.headers.Authorization = `Bearer ${token}`;
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 const apiAuth = Axios.create({
   baseURL: `${process.env.REACT_APP_API_NODE_URL}/auth`,

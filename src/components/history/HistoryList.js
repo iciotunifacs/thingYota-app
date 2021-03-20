@@ -35,7 +35,7 @@ const HistoryList = (props) => {
       page: 0,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
+  }, []);
 
   if (historyState.loading) {
     return <Spin tip="Carregando" />;
@@ -44,6 +44,8 @@ const HistoryList = (props) => {
   if (historyState.error) {
     return <Exceptions type={500} />;
   }
+
+  console.log(historyState);
 
   if (
     historyState.called &&
@@ -64,7 +66,7 @@ const HistoryList = (props) => {
         defaultPageSize={limit}
         defaultCurrent={currentPage}
         current={currentPage}
-        onChange={(page, pageSize) => {
+        onChange={(page) => {
           getHistory(historyDispatch, {
             limit,
             page: page - 1,
