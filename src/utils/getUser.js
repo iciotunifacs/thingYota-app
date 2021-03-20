@@ -1,7 +1,9 @@
-const getUser = () => JSON.parse(localStorage.getItem('user'))
-const cleanUser = async () => localStorage.setItem('user', null);
+const getUser = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
 
-export {
-    cleanUser,
-    getUser as default,
+  console.log(user);
+  return user;
 };
+const cleanUser = async () => localStorage.setItem("user", null);
+
+export { cleanUser, getUser as default };
