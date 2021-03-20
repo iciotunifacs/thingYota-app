@@ -1,14 +1,13 @@
 import React from "react";
 
 import History from "../components/history/HistoryView-container";
-import TopbarView from "../components/topbar/TopbarView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 
 const Statistics = () => {
   return (
-    <>
-      <TopbarView />
+    <DefaultScreen>
       <History />
-    </>
+    </DefaultScreen>
   );
 };
 

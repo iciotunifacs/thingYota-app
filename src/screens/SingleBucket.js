@@ -1,18 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import {
-  PageView
-} from '../Base-style'
+import { PageView } from "../Base-style";
 
-import SingleBucketView from '../components/buckets/SingleBucketView-container'
+import SingleBucketView from "../components/buckets/SingleBucketView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 function SingleBucket(props) {
-  const { bucketId } = props.match.params
+  const { bucketId } = props.match.params;
   return (
-    <PageView>
-      <SingleBucketView bucketId={bucketId}/>
-    </PageView>
-  )
+    <DefaultScreen>
+      <PageView>
+        <SingleBucketView bucketId={bucketId} />
+      </PageView>
+    </DefaultScreen>
+  );
 }
 
-
-export default SingleBucket
+export default SingleBucket;

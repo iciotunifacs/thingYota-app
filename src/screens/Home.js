@@ -1,13 +1,12 @@
 import React from "react";
 import Homeview from "../components/home/HomeView-container";
-import TopbarView from "../components/topbar/TopbarView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 
 const Home = (props) => {
   return (
-    <>
-      <TopbarView />
+    <DefaultScreen>
       <Homeview {...props} />
-    </>
+    </DefaultScreen>
   );
 };
 

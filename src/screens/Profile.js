@@ -1,10 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import ProfileView from '../components/profile/ProfileView-container'
+import ProfileView from "../components/profile/ProfileView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 const Profile = () => {
   return (
-      <ProfileView/>
-  )
-}
+    <DefaultScreen>
+      <ProfileView />
+    </DefaultScreen>
+  );
+};
 
-export default Profile
+export default Profile;

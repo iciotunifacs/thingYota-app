@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
-import DeviceView from '../components/device/DeviceView-container';
+import DeviceView from "../components/device/DeviceView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 
 function Devices(props) {
   return (
-    <DeviceView {...props}/>
-  )
+    <DefaultScreen>
+      <DeviceView {...props} />
+    </DefaultScreen>
+  );
 }
 
-export default Devices
+export default Devices;

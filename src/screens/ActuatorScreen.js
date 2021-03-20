@@ -1,21 +1,20 @@
 import React from "react";
 import Actuator from "../components/forms/Actuator.js";
-import TopbarView from "../components/topbar";
 import { Typography } from "antd";
+import DefaultScreen from "../layout/DefaultScreen.js";
 
 const { Title } = Typography;
 
 const ActuatorScreen = (props) => {
   return (
-    <>
-      <TopbarView />
+    <DefaultScreen>
       <div style={containerStyle} {...props}>
         <Title level={2} style={titleStyle}>
           Add an actuator (description??)
         </Title>
         <Actuator />
       </div>
-    </>
+    </DefaultScreen>
   );
 };
 

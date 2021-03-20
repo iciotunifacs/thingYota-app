@@ -1,9 +1,12 @@
-import React from 'react'
-import SingupView from "../components/auth/SingupView-container"
+import React from "react";
+import SingupView from "../components/auth/SingupView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 const Singup = (props) => {
   return (
-    <SingupView {...props}/>
-  )
-}
+    <DefaultScreen>
+      <SingupView {...props} />
+    </DefaultScreen>
+  );
+};
 
-export default Singup
+export default Singup;

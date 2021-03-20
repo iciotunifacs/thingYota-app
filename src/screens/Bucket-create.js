@@ -1,13 +1,12 @@
 import React from "react";
 import BucketCreate from "../components/buckets/BucketCreateView-container";
-import TopbarView from "../components/topbar/TopbarView-container";
+import DefaultScreen from "../layout/DefaultScreen";
 
 const BucketScreen = (props) => {
   return (
-    <>
-      <TopbarView />
+    <DefaultScreen>
       <BucketCreate {...props} />
-    </>
+    </DefaultScreen>
   );
 };
 
